@@ -1,0 +1,1 @@
+# Constructer for Inducer class
