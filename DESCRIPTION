@@ -1,0 +1,23 @@
+Package: mlr.mini
+Title: Mini Package for Machine Learning in R
+Version: 0.0.1
+Authors@R: c(
+    person(given = "Sophie", family = "H.", role = c("aut", "cre"), email = "mlr.sophie@campus.lmu.de"),
+    person(given = "Philip", family = "S.", role = "aut", email = "mlr.studener@campus.lmu.de"),
+    person(given = "Pamela", family = "T.", role = "aut", email = "pamela.tueam@campus.lmu.de"),
+    person(given = "Sui", family = "G.", role = "aut", email = "abcd@campus.lmu.de"),
+    person(given = "Anna", family = "N.", role = "aut", email = "anna.nazarova@campus.lmu.de")
+  )
+Description: provides a mini package for machine learning in R
+License: MIT
+URL: https://github.com/AdvaProgR-2324/mlr.mini
+BugReports: https://github.com/AdvaProgR-2324/mlr.mini/issues
+ByteCompile: true
+Encoding: UTF-8
+Config/testthat/edition: 3
+Config/testthat/parallel: true
+Roxygen: list(markdown = TRUE)
+Imports:
+  checkmate
+Suggests:
+  testthat
