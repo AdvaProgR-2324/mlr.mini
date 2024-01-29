@@ -8,7 +8,7 @@ Authors@R: c(
     person(given = "Sui", family = "G.", role = "aut", email = "abcd@campus.lmu.de"),
     person(given = "Anna", family = "N.", role = "aut", email = "anna.nazarova@campus.lmu.de")
   )
-Description: provides a mini package for machine learning in R
+Description: Provides a mini package for machine learning in R.
 License: MIT
 URL: https://github.com/AdvaProgR-2324/mlr.mini
 BugReports: https://github.com/AdvaProgR-2324/mlr.mini/issues

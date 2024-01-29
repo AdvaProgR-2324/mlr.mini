@@ -118,8 +118,18 @@ as.data.frame.Dataset <- function(x, row.names = NULL, optional = FALSE, ..., co
 }
 
 # Maybe we move the following to the metainfo file (?)
-# Define the 'metainfo' generic function
-metainfo <- function(x) {UseMethod("metainfo")}
+#' @title 'metainfo' generic function
+#' 
+#' @description Get the metainfo of an object
+#' 
+#' @param x An object
+#' @examples
+#' metainfo(Dataset(data = cars, target = "dist"))
+#' @export
+metainfo <- function(x) {
+  UseMethod("metainfo")
+}
+
 #' @title 'metainfo' method for Dataset objects
 #' 
 #' @description Get the metainfo of a Dataset object (name, features, targets, nrow, type, missings)
