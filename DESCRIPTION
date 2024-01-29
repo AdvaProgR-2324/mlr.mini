@@ -21,3 +21,4 @@ Imports:
   checkmate
 Suggests:
   testthat
+RoxygenNote: 7.3.0

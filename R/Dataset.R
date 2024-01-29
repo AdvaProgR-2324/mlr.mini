@@ -6,22 +6,22 @@
 #' @param target The name of the target column
 #' @param name The name of the dataset, by default the name of the given data object
 #' @param task The task of the dataset: "classification" or "regression". If no task is provided, numerical target columns are considered as regression tasks, and non-numeric target columns as classification tasks.
-#' @example
+#' @examples
 #' cars.data <- Dataset(data = cars, target = "dist")
 #' class(cars.data)
 #' @export
-Dataset <- function(data, target, name = deparse(substitute(data)), task) {
+Dataset <- function(data, target, name = deparse(substitute(data)), type) {
   # Input checks
   assertDataFrame(data)
   assertChoice(target, colnames(data))
   assertCharacter(name)
-  if(!missing(task)) {
-    assertChoice(task, c("classification", "regression"))
+  if(!missing(type)) {
+    assertChoice(type, c("classification", "regression"))
   }
   
   # Infer the task
-  if (missing(task)) {
-    task <- if (is.numeric(data[[target]])) {
+  if (missing(type)) {
+    type <- if (is.numeric(data[[target]])) {
       "regression"
     } else {
       "classification"
@@ -44,7 +44,7 @@ Dataset <- function(data, target, name = deparse(substitute(data)), task) {
 #' @description Print a Dataset object
 #' 
 #' @param x A Dataset object
-#' @example
+#' @examples
 #' cars.data <- Dataset(data = cars, target = "dist")
 #' print(cars.data)
 #' @export
@@ -60,7 +60,7 @@ print.Dataset <- function(x) {
 #' @param x A Dataset object
 #' @param i A vector of row indices
 #' @param j A vector of column names or indices
-#' @example
+#' @examples
 #' cars.data <- Dataset(data = cars, target = "dist")
 #' cars.data[c(1, 2, 3, 4), ]
 #' cars.data[c(1, 2), "dist"]
@@ -99,7 +99,7 @@ print.Dataset <- function(x) {
 #' @param x A Dataset object
 #' @param columns Which columns to include in the data frame: "all", "target", "features". By default "all".
 #' 
-#' @example
+#' @examples
 #' cars.data <- Dataset(data = cars, target = "dist")
 #' head(as.data.frame(cars.data))
 #' @export
@@ -121,7 +121,7 @@ metainfo <- function(x) {UseMethod("metainfo")}
 #' @description Get the metainfo of a Dataset object (name, features, targets, nrow, type, missings)
 #' 
 #' @param x A Dataset object
-#' @example
+#' @examples
 #' cars.data <- Dataset(data = cars, target = "dist")
 #' metainfo(cars.data)
 #' @export
@@ -150,3 +150,4 @@ metainfo.Dataset <- function(x) {
   class(info) <- "DatasetInfo"
   return(info)
 }
+
