@@ -5,7 +5,7 @@
 #' @param data A data frame containing the data
 #' @param target The name of the target column
 #' @param name The name of the dataset, by default the name of the given data object
-#' @param task The task of the dataset: "classification" or "regression". If no task is provided, numerical target columns are considered as regression tasks, and non-numeric target columns as classification tasks.
+#' @param type The task of the dataset: "classification" or "regression". If no task is provided, numerical target columns are considered as regression tasks, and non-numeric target columns as classification tasks.
 #' @examples
 #' cars.data <- Dataset(data = cars, target = "dist")
 #' class(cars.data)
