@@ -1,147 +1,167 @@
-# Constructer for Dataset()
-
-# Dataset object
-
-Dataset <- function(data, target, name){
-  
-  # if name is not given
-  
-  if(missing(name)) {
-    name <- as.name(deparse(substitute(data), 20)[[1]])
+#' @title Dataset S3 class
+#' 
+#' @description A class for storing datasets
+#' 
+#' @param data A data frame containing the data
+#' @param target The name of the target column
+#' @param name The name of the dataset, by default the name of the given data object
+#' @param type The task of the dataset: "classification" or "regression". If no task is provided, numerical target columns are considered as regression tasks, and non-numeric target columns as classification tasks.
+#' @examples
+#' cars.data <- Dataset(data = cars, target = "dist")
+#' class(cars.data)
+#' @export
+Dataset <- function(data, target, name = deparse(substitute(data)), type) {
+  # Input checks
+  assertDataFrame(data)
+  assertChoice(target, colnames(data))
+  assertCharacter(name)
+  if(!missing(type)) {
+    assertChoice(type, c("classification", "regression"))
   }
   
-  if(!(target %in% colnames(data))) stop("data must contain the target")
-  
-  ind <- which(colnames(data) == target) ## columns indice of the target in the data
-  targetcolumn <- data[, ind, drop = FALSE]
-  
-  # features 
-  features <- colnames(data)[-ind]
-  
-  # data
-  data <- data[, c(target, features), drop = FALSE]
-  
-  # number of row
-  number_of_row <- nrow(data)
-  
-  if(is.numeric(targetcolumn[, 1])){
-    cl <- "DatasetRegression"      ## Task
-    type <- "regression"
-  }
-  else if(is.character(targetcolumn[, 1])){
-    cl <- "DatasetClassification"         #Task
-    type <- "classification"
+  # Infer the task
+  if (missing(type)) {
+    type <- if (is.numeric(data[[target]])) {
+      "regression"
+    } else {
+      "classification"
+    }
   }
   
-  # missings value
-  if(any(is.na(data))){
-    missings <- TRUE
-  }else missings <- FALSE
+  # Target should be the first column
+  data_ordered <- data[, c(target, setdiff(names(data), target))]
   
-  value <- list(name = name, 
-                features = features,
-                target = target,
-                data = data,
-                nrow = number_of_row,
-                type = type,
-                missings = missings)
-  attr(value, "class") <- c(cl, "Dataset")
-  value
+  structure(list(
+    data = data_ordered,
+    target = target,
+    type = type,
+    name = name
+  ), class = c(paste0("Dataset", tools::toTitleCase(type)), "Dataset"))
 }
 
-#[-function
+#' @title 'print' method for Dataset objects
+#' 
+#' @description Print a Dataset object
+#' 
+#' @param x A Dataset object
+#' @param ... Additional arguments
+#' @examples
+#' cars.data <- Dataset(data = cars, target = "dist")
+#' print(cars.data)
+#' @export
+print.Dataset <- function(x, ...) {
+  cat("Dataset \"", x$name, "\", predicting \"", x$target, "\" (", tools::toTitleCase(x$type), ")\n", sep = "")
+  print(x$data, ...)
+}
 
-`[.Dataset` <- function(x, row, col){
-  
-  # if col is not given
-  
-  if(missing(col)){
-    col <- colnames(x$data)
+#' @title '[' method for subsetting Dataset objects
+#' 
+#' @description Subset a Dataset object
+#' 
+#' @param x A Dataset object
+#' @param i A vector of row indices
+#' @param j A vector of column names or indices
+#' @examples
+#' cars.data <- Dataset(data = cars, target = "dist")
+#' cars.data[c(1, 2, 3, 4), ]
+#' cars.data[c(1, 2), "dist"]
+#' @export
+`[.Dataset` <- function(x, i, j) {
+  # Input checks
+  if(!missing(i)) {
+    assertNumeric(i, lower = 1, upper = nrow(x$data))
   }
   
-  if(!(x$target %in% col)) stop("Error: Cannot remove target column 'dist'")
-  
-  result <- x$data[row, col, drop = FALSE]
-  target <- x$target
-  
-  return(Dataset(result, target = target, name = x$name))
-}
-
-
-# the method as.data.frame.Dataset()
-
-
-as.data.frame.Dataset <- function(x, column){
-  
-  
-  if(missing(column)) {
-    result <- x$data
-  } 
-  else if (column == "target") {
-    result <- x[, x$target]
-  } 
-  else if(column == "covariates") {
-    result <- x$data[, x$features, drop = FALSE]
+  # Check if 'j' is provided, if not select all columns
+  if (missing(j)) {
+    j <- colnames(x$data)
+  }
+  # check if j is valid (valid colnames or indices)
+  if (is.character(j)) {
+    assertTRUE(all(j %in% colnames(x$data)))
+  } else {
+    assertNumeric(j, lower = -ncol(x$data), upper = ncol(x$data))
   }
   
-  result
-}
-
-x <- function(col){
-  if(col == "x") result <- T
-  else if(col == "y") result <- F
-  result
-}
-
-## print method
-
-print <- function(data){
-  UseMethod("print")
-}
-
-print.Dataset <- function(obj){
-  if("DatasetRegression" %in% class(obj)){
-    task <- "Regression"
-  }
-  if("DatasetClassification" %in% class(obj)){
-    task <- "Classification"
-  }
-  cat("Dataset \"", obj$name, "\", predicting \"", obj$target, "\" (", task,  ")\n", sep = "")
+  new_data <- x$data[i, j, drop = FALSE]
   
-  #as.data.frame(obj)
-  print(obj$data)
+  # Ensure that the target column is not removed
+  if (!(x$target) %in% colnames(new_data)) {
+    stop(sprintf("Cannot remove target column %s", x$target))
+  }
   
+  return(Dataset(data = new_data, target = x$target, name = x$name))
 }
 
-# generic metainfo()
+#' @title 'as.data.frame' method for Dataset objects
+#' 
+#' @description Convert a Dataset object to a data frame
+#' 
+#' @param x A Dataset object
+#' @param row.names A vector of row names
+#' @param optional A logical value. If TRUE, setting row names and converting column names is optional.
+#' @param ... Additional arguments
+#' @param columns Which columns to include in the data frame: "all", "target", "features". By default "all".
+#' 
+#' @examples
+#' cars.data <- Dataset(data = cars, target = "dist")
+#' head(as.data.frame(cars.data))
+#' @export
+as.data.frame.Dataset <- function(x, row.names = NULL, optional = FALSE, ..., columns = "all") {
+  # Input checks
+  assertChoice(columns, c("all", "target", "features"))
+  
+  switch(columns,
+         "all" = x$data,
+         "target" = x$data[, x$target, drop = FALSE],
+         "features" = x$data[, setdiff(names(x$data), x$target), drop = FALSE])
+}
 
-metainfo <- function(x){
+# Maybe we move the following to the metainfo file (?)
+#' @title 'metainfo' generic function
+#' 
+#' @description Get the metainfo of an object
+#' 
+#' @param x An object
+#' @examples
+#' metainfo(Dataset(data = cars, target = "dist"))
+#' @export
+metainfo <- function(x) {
   UseMethod("metainfo")
 }
 
-## metainfo() method
-metainfo.Dataset <- function(x){
-  element <- list(name = x$name,
-                  features = setNames(class(x$data[[x$features]]), x$features),
-                  targets = setNames(class(x$data[[x$target]]), x$target),
-                  nrow = x$nrow,
-                  type = x$type,
-                  missings = x$missings)
-  attr(element, "class") <- "Datasetinfo"
-  element
+#' @title 'metainfo' method for Dataset objects
+#' 
+#' @description Get the metainfo of a Dataset object (name, features, targets, nrow, type, missings)
+#' 
+#' @param x A Dataset object
+#' @examples
+#' cars.data <- Dataset(data = cars, target = "dist")
+#' metainfo(cars.data)
+#' @export
+metainfo.Dataset <- function(x) {
+  get_class <- function(x) {
+    switch (class(x),
+      numeric = "num",
+      character = "char",
+      logical = "logi",
+      "other"
+    )
+  }
+  
+  feature_names <- setdiff(names(x$data), x$target)
+  features <- get_class(x$data[, feature_names])
+  names(features) <- feature_names
+  
+  info <- list(
+    name = x$name,
+    features = features,
+    targets = setNames(get_class(x$data[[x$target]]), x$target),
+    nrow = nrow(x$data),
+    type = x$type,
+    missings = any(is.na(x$data))
+  )
+  class(info) <- "DatasetInfo"
+  return(info)
 }
 
-
-## Example
-cars.data <- Dataset(data = cars, target = "dist")
-print(cars.data)
-class(cars.data)
-
-cars.data[c(1, 2, 3, 4), ]
-cars.data[c(1, 2), "dist"]
-
-
-metainfo(cars.data)
-
-
-as.data.frame(cars.data)
