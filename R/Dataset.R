@@ -44,13 +44,14 @@ Dataset <- function(data, target, name = deparse(substitute(data)), type) {
 #' @description Print a Dataset object
 #' 
 #' @param x A Dataset object
+#' @param ... Additional arguments
 #' @examples
 #' cars.data <- Dataset(data = cars, target = "dist")
 #' print(cars.data)
 #' @export
-print.Dataset <- function(x) {
+print.Dataset <- function(x, ...) {
   cat("Dataset \"", x$name, "\", predicting \"", x$target, "\" (", tools::toTitleCase(x$type), ")\n", sep = "")
-  print(x$data)
+  print(x$data, ...)
 }
 
 #' @title '[' method for subsetting Dataset objects
@@ -97,13 +98,16 @@ print.Dataset <- function(x) {
 #' @description Convert a Dataset object to a data frame
 #' 
 #' @param x A Dataset object
+#' @param row.names A vector of row names
+#' @param optional A logical value. If TRUE, setting row names and converting column names is optional.
+#' @param ... Additional arguments
 #' @param columns Which columns to include in the data frame: "all", "target", "features". By default "all".
 #' 
 #' @examples
 #' cars.data <- Dataset(data = cars, target = "dist")
 #' head(as.data.frame(cars.data))
 #' @export
-as.data.frame.Dataset <- function(x, columns = "all") {
+as.data.frame.Dataset <- function(x, row.names = NULL, optional = FALSE, ..., columns = "all") {
   # Input checks
   assertChoice(columns, c("all", "target", "features"))
   
