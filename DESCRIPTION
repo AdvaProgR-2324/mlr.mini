@@ -21,4 +21,7 @@ Imports:
   checkmate
 Suggests:
   testthat
+<<<<<<< HEAD
 RoxygenNote: 7.3.0
+=======
+>>>>>>> 3ff28b246a5512eee730ef8a4ba0a60047a4e01b
