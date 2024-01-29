@@ -5,20 +5,27 @@
 #' @param data A data frame containing the data
 #' @param target The name of the target column
 #' @param name The name of the dataset, by default the name of the given data object
+#' @param task The task of the dataset: "classification" or "regression". If no task is provided, numerical target columns are considered as regression tasks, and non-numeric target columns as classification tasks.
 #' @example
 #' cars.data <- Dataset(data = cars, target = "dist")
 #' class(cars.data)
 #' @export
-Dataset <- function(data, target, name = deparse(substitute(data))) {
+Dataset <- function(data, target, name = deparse(substitute(data)), task) {
   # Input checks
   assertDataFrame(data)
   assertChoice(target, colnames(data))
+  assertCharacter(name)
+  if(!missing(task)) {
+    assertChoice(task, c("classification", "regression"))
+  }
   
   # Infer the task
-  if (is.numeric(data[[target]])) {
-    type <- "Regression"
-  } else {
-    type <- "Classification"
+  if (missing(task)) {
+    task <- if (is.numeric(data[[target]])) {
+      "regression"
+    } else {
+      "classification"
+    }
   }
   
   # Target should be the first column
@@ -29,7 +36,7 @@ Dataset <- function(data, target, name = deparse(substitute(data))) {
     target = target,
     type = type,
     name = name
-  ), class = c("Dataset", paste0("Dataset", type)))
+  ), class = c(paste0("Dataset", tools::toTitleCase(type)), "Dataset"))
 }
 
 #' @title 'print' method for Dataset objects
@@ -42,7 +49,7 @@ Dataset <- function(data, target, name = deparse(substitute(data))) {
 #' print(cars.data)
 #' @export
 print.Dataset <- function(x) {
-  cat("Dataset \"", x$name, "\", predicting \"", x$target, "\" (", x$type, ")\n", sep = "")
+  cat("Dataset \"", x$name, "\", predicting \"", x$target, "\" (", tools::toTitleCase(x$type), ")\n", sep = "")
   print(x$data)
 }
 
@@ -52,7 +59,7 @@ print.Dataset <- function(x) {
 #' 
 #' @param x A Dataset object
 #' @param i A vector of row indices
-#' @param j A vector of column indices or column names
+#' @param j A vector of column names or indices
 #' @example
 #' cars.data <- Dataset(data = cars, target = "dist")
 #' cars.data[c(1, 2, 3, 4), ]
@@ -60,7 +67,6 @@ print.Dataset <- function(x) {
 #' @export
 `[.Dataset` <- function(x, i, j) {
   # Input checks
-  assertClass(x, "Dataset")
   if(!missing(i)) {
     assertNumeric(i, lower = 1, upper = nrow(x$data))
   }
@@ -77,6 +83,7 @@ print.Dataset <- function(x) {
   }
   
   new_data <- x$data[i, j, drop = FALSE]
+  
   # Ensure that the target column is not removed
   if (!(x$target) %in% colnames(new_data)) {
     stop(sprintf("Cannot remove target column %s", x$target))
@@ -98,7 +105,6 @@ print.Dataset <- function(x) {
 #' @export
 as.data.frame.Dataset <- function(x, columns = "all") {
   # Input checks
-  assertClass(x, "Dataset")
   assertChoice(columns, c("all", "target", "features"))
   
   switch(columns,
@@ -107,7 +113,7 @@ as.data.frame.Dataset <- function(x, columns = "all") {
          "features" = x$data[, setdiff(names(x$data), x$target), drop = FALSE])
 }
 
-# Maybe move the following to the metainfo file
+# Maybe we move the following to the metainfo file (?)
 # Define the 'metainfo' generic function
 metainfo <- function(x) {UseMethod("metainfo")}
 #' @title 'metainfo' method for Dataset objects
@@ -120,14 +126,23 @@ metainfo <- function(x) {UseMethod("metainfo")}
 #' metainfo(cars.data)
 #' @export
 metainfo.Dataset <- function(x) {
+  get_class <- function(x) {
+    switch (class(x),
+      numeric = "num",
+      character = "char",
+      logical = "logi",
+      "other"
+    )
+  }
+  
   feature_names <- setdiff(names(x$data), x$target)
-  features <- class(x$data[, feature_names])
+  features <- get_class(x$data[, feature_names])
   names(features) <- feature_names
   
   info <- list(
     name = x$name,
     features = features,
-    targets = setNames(class(x$data[[x$target]]), x$target),
+    targets = setNames(get_class(x$data[[x$target]]), x$target),
     nrow = nrow(x$data),
     type = x$type,
     missings = any(is.na(x$data))
@@ -135,14 +150,3 @@ metainfo.Dataset <- function(x) {
   class(info) <- "DatasetInfo"
   return(info)
 }
-
-# Example usage
-cars.data <- Dataset(data = cars, target = "dist")
-print(cars.data)
-class(cars.data)
-
-cars.data[c(1, 2, 3, 4), ]
-cars.data[c(1, 2), "dist"]
-cars.data[, "speed"]
-
-metainfo(cars.data)
