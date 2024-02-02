@@ -11,12 +11,12 @@ test_that("Test Dataset", {
   expect_error(cars.data[, "speed"])
   
   ## Test metainfo (Test doesn't work yet)
-  # expect_equal(metainfo(cars.data)[1:6], list(
-  #   name = "cars",
-  #   features = c(speed = "numeric"),
-  #   targets = c(dist = "numeric"),
-  #   nrow = 50,
-  #   type = "regression",
-  #   missings = FALSE
-  # ))
+  expect_equal(metainfo(cars.data)[1:6], list(
+    name = "cars",
+    features = c(speed = "num"),
+    targets = c(dist = "num"),
+    nrow = 50,
+    type = "regression",
+    missings = FALSE
+  ))
 })
