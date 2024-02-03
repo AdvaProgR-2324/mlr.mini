@@ -34,7 +34,10 @@ hyperparameters.Inducer <- function(x) {
 }
 
 
-#' @title copy an inducer.
+
+copy <- function(.inducer, new_configuration) UseMethod("copy")
+
+#' @title Create copy of an inducer.
 #' 
 #' @description generic for `Inducer` class that produces copies of instances of
 #' `Inducer` class that contain a new hyperparameter configuration.
@@ -60,7 +63,6 @@ hyperparameters.Inducer <- function(x) {
 #' NewInducerXgboost <- copy(InducerXgboost)
 #' print(NewInducerXgboost)
 #' @export
-copy <- function(.inducer, new_configuration) UseMethod("copy")
 copy.Inducer <- function(.inducer, new_configuration) {
   # TO DO: Check validity of hyperparameters!
   if (missing(new_configuration)) {
@@ -78,20 +80,18 @@ copy.Inducer <- function(.inducer, new_configuration) {
 }
 
 
-#' @title Accessor for the `configuration` of an inducer.
-#' 
-#' @param x S3 object of class inducer.
-#' 
-#' @returns Named list of hyperparameter configurations.
 configuration <- function(x) UseMethod("configuration")
+
+#' @title Accessor for the `configuration` of an inducer.
+#' @param x S3 object of class inducer.
+#' @returns Named list of hyperparameter configurations.
 configuration.Inducer <- function(x) x$configuration
 
 
 #' @title Setter for the `configuration` of an inducer.
-#' 
 #' @description Set new configuration values for the hyperparameters of a given
 #'  inducer.
-#' 
+#' @export
 `configuration<-` <- function(object, value) {
   UseMethod("configuration<-", object)
 }
@@ -102,22 +102,45 @@ configuration.Inducer <- function(x) x$configuration
 }
 
 
+
 fit <- function(.inducer, .data,...) UseMethod("fit")
-Inducer <- function(.inducer, .data,...) {
+fit.Inducer <- function(.inducer, .data, ...) {
+  assertClass(.inducer, classes = c("Inducer"))
+  assertClass(.data, classes = c("Dataset"))
+  
+  task <- stringr::str_to_title(.data$type)
+  training_data <- .data$data
+  response <- .data$target
+  y <- training_data[, (names(training_data) != response)]
+  
   argdots <- list(...)
   if (any(!(.inducer$hyperparameters %in% names(argdots)))) {
-    print("Add additional hyperparameter")
     configuration(.inducer) <- argdots
   }
   
-  # Call fit2 on specific inducer
+  model <- fit2(.inducer, task = task, training_data = training_data, response = response)
   
-  
-  # Returns an S3 object with the following fields:
-  # - model parameters
-  # - y: target variable used for fitting
-  # - X: data the model was trained on (w/o y)
-  # - inducer from input
-  # - configuration
+  structure(
+    list(
+      inducer = .inducer,
+      data = .data,
+      X = training_data,
+      y = y,
+      model = model,
+      task = task
+    ),
+    class = "Model"
+  )
 }
 
+print.Model <- function(x,...) {
+  cat(sprintf('%s Model: "%s" fitted on "%s" dataset.', x$task, x$inducer$method,
+          x$data$name))
+}
+
+
+# Test:
+# meep <- fit(InducerXgboost, cars.data, eta = 0.2, nrounds = 10, verbose = 0)
+# meep
+# meep$inducer
+# meep$data
