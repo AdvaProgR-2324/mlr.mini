@@ -23,8 +23,6 @@ inducer <- function(model) {
   invisible(list(inducer = inducer_name, configuration = config))
 }
 
-
-
 #' @title Configuration Information
 #' 
 #' @description
@@ -34,7 +32,7 @@ inducer <- function(model) {
 #' @examples
 #' configuration(model.xgb)
 #' @export
-configuration <- function(model) {
+configuration.Model <- function(model) {
   # Input Checks
   # to do
   
@@ -85,38 +83,157 @@ modelInfo <- function(model) {
   return(list(training.time.sec = training_time_sec))
 }
 
+predict2 <- function(predictions) {
+  if (is.data.frame(newdata)) {
+    result <- predictions
+  } else {
+    result <- data.frame(prediction = predictions, truth = as.data.frame(newdata, columns = "target"))
+  }
+  return(result)
+}
 
-#' @title Predictions for ModelXGBoost ?
+#' @title Predictions for ModelXGBoost
 #' 
 #' @description
 #' this function predicts the response variable using a trained ModelXGBoost object
 #' 
 #' @param model A model object
+#' @param ... Additional arguments
 #' @param newdata A data frame or Dataset with the new data
 #' @param type A character string specifying the type of prediction: "response", "se" (standard error), or "prob" (probability). The default is "response".
 #' 
 #' @examples
+#' model.xgb <- xgb(cars.data)
 #' predict(model.xgb, newdata = data.frame(speed = 10))
 #' prediction <- predict(model.xgb, newdata = cars.data[c(1, 2, 3, 4), ])
 #' prediction
 #' @export
-predict.ModelXGBoost <- function(model, newdata, type = "response") {
+predict.ModelXGBoost <- function(model, ..., newdata, type = "response") {
   # Input Checks
   # to do
   assertMultiClass(newdata, c("data.frame", "Dataset"))
   assertChoice(type, c("response", "se", "prob"))
   
-  # perform predictions
-  # to do
+  data <- if (is.data.frame(newdata)) newdata else as.data.frame(newdata)
+  
+  # select only the features
+  # data <- data[, "speed", drop = FALSE] # hard coded right now
+  data <- data[, modelObject(model.xgb)[["feature_names"]]]
+  
+  # class(model) <- c("xgb.Booster") # need to delete this later
+  predictions <- predict(modelObject(model), newdata = as.matrix(data))
   
   if (is.data.frame(newdata)) {
     result <- predictions
   } else {
-    result <- data.frame(prediction = predictions, truth = truth)
+    result <-
+      data.frame(prediction = predictions,
+                 truth = as.data.frame(newdata, columns = "target"))
+  }
+  return(result)
+}
+
+#' @title Predictions for lm
+#' 
+#' @description
+#' this function predicts the response variable using a trained lm model
+#' 
+#' @param model A model object
+#' @param ... Additional arguments
+#' @param newdata A data frame or Dataset with the new data
+#' @param type A character string specifying the type of prediction: "response", "se" (standard error), or "prob" (probability). The default is "response".
+#' 
+#' @examples
+#' model.lm <- lm(dist ~ speed, data = cars)
+#' predict(model.lm, newdata = data.frame(speed = 10))
+#' prediction <- predict(model.lm, newdata = cars.data[c(1, 2, 3, 4), ])
+#' prediction
+#' @export
+predict.ModelLm <- function(model, ..., newdata, type = "response") {
+  # Input Checks
+  # to do
+  assertMultiClass(newdata, c("data.frame", "Dataset"))
+  assertChoice(type, c("response", "se", "prob"))
+  
+  data <- if (is.data.frame(newdata)) newdata else as.data.frame(newdata)
+  # class(model) <- c("lm") # need to change this later
+  predictions <- predict(modelObject(model), newdata = data)
+  
+  if (is.data.frame(newdata)) {
+    result <- predictions
+  } else {
+    result <- data.frame(prediction = predictions, truth = as.data.frame(newdata, columns = "target"))
+  }
+  return(result)
+}
+
+
+#' @title Predictions for Dummy
+#' 
+#' @description
+#' this function predicts the majority class in a classification task or the average outcome in a regression task
+#' 
+#' @param model A model object
+#' @param ... Additional arguments
+#' @param newdata A data frame or Dataset with the new data
+#' @param type A character string specifying the type of prediction: "response", "se" (standard error), or "prob" (probability). The default is "response".
+#' 
+#' @examples
+#' model.dummy <- dummy(data = cars, target = "dist")
+#' predict(model.dummy, newdata = data.frame(speed = 10))
+#' prediction <- predict(model.dummy, newdata = cars.data[c(1, 2, 3, 4), ])
+#' prediction
+#' @export
+predict.ModelDummy <- function(model, ..., newdata, type = "response") {
+  # Input Checks
+  # to do
+  assertMultiClass(newdata, c("data.frame", "Dataset"))
+  assertChoice(type, c("response", "se", "prob"))
+  
+  data <- ifelse(is.data.frame(newdata), newdata, newdata$data)
+  
+  if ("ModelRegression" %in% class(model)) {
+    predictions <- mean(model$y)
+  } else {
+    predictions <- names(which.max(table(model$y)))
   }
   
-  return(result)
-  
-  # extension for type = "prob" or type = "se"
-  # to do
+  predict2(predictions)
 }
+
+#' @title Predictions for RandomForest
+#' 
+#' @description
+#' this function predicts the response variable using a trained RandomForest model
+#' 
+#' @param model A model object
+#' @param ... Additional arguments
+#' @param newdata A data frame or Dataset with the new data
+#' @param type A character string specifying the type of prediction: "response", "se" (standard error), or "prob" (probability). The default is "response".
+#' 
+#' @examples
+#' model.rf <- rf(cars.data)
+#' predict(model.rf, newdata = data.frame(speed = 10))
+#' prediction <- predict(model.rf, newdata = cars.data[c(1, 2, 3, 4), ])
+#' prediction
+#' @export
+predict.ModelRandomForest <- function(model, ..., newdata, type = "response") {
+  # Input Checks
+  # to do
+  assertMultiClass(newdata, c("data.frame", "Dataset"))
+  assertChoice(type, c("response", "se", "prob"))
+  
+  data <- ifelse(is.data.frame(newdata), newdata, newdata$data)
+  predictions <- predict(model, newdata = data)
+  
+  predict2(predictions)
+}
+
+## Classes
+# Model
+# ModelRegression
+# ModelClassification
+# ModelXGBoost
+# ModelLm
+# ModelDummy
+# ModelRandomForest
