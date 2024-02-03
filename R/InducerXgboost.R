@@ -2,23 +2,24 @@
 
 source(here::here("R/Inducer.R"))  # TO DO: delete this
 
-InducerXgboost <- InducerConstructer(hyperparam = c("nrounds", "max_depth", "eta"),
-                                     config = c(100, 6, 0.3),
+InducerXgboost <- InducerConstructer(configuration = list(nrounds = 100, 
+                                                          max_depth = 6, 
+                                                          eta = 0.3),
                                      method = "Xgboost")
-class(InducerXgboost)
-InducerXgboost
-hyperparameters(InducerXgboost)
-configuration(InducerXgboost)
-configuration(InducerXgboost) <- list(nrounds = 20, test = TRUE)
-hyperparameters(InducerXgboost)
-InducerXgboost
 
-fit2.InducerXgboost <- function(.inducer, .data,...) {
-  args <- list(...)
-  if (any(!(inducer$hyperparameters %in% names(args)))) {
-    print("Add additional hyperparameter")
-  }
-  # To Do: Add new configuration
+fit2 <- function(.inducer, .data,...) UseMethod("fit2")
+fit2.InducerXgboost <- function(.inducer, .data) {
+  
+  objective <- if (.data$type == "regression") {
+      "reg:squarederror"
+    } else if (.data$type == "multiclass") {
+      "multi:softprob"  # maybe turn this into "multi:softmax" ?
+    } else if (.data$type == "classification") {
+      "binary:logistic"
+    }
+  
+   
+
   
   
   

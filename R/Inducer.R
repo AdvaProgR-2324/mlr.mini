@@ -1,71 +1,123 @@
 # Constructer for Inducer Class:
-InducerConstructer <- function(hyperparameters, configuration, method) {
-  configuration_list <- as.list(configuration)
-  names(configuration_list) <- hyperparameters
+InducerConstructer <- function(configuration, method) {
+  # TO DO: Check validity of hyperparameters!
+  assertList(configuration, names = "named")
+  assertCharacter(method, len=1)
+  hyperparameters <- names(configuration)
   Inducer <- structure(
     list(
       method = method,
       hyperparameters = hyperparameters,
-      configuration = configuration_list
+      configuration = configuration
     ),
     class =  c(paste0("Inducer", method), "Inducer")
   )
   Inducer
 }
 
-# Printer for Inducer Class:
+#'  @title print Inducer.
+#'  
+#'  @description
+#'  print information about inducer.
+#'  
 print.Inducer <- function(x,...) {
-  config <- do.call(paste, c(list(x$hyperparameters, x$configuration), list(sep=" = ", collapse=", ")))
+  config <- do.call(paste, c(list(x$hyperparameters, x$configuration),
+                             list(sep=" = ", collapse=", ")))
   cat(sprintf("Inducer: %s\nConfiguration: %s", x$method, config))
   invisible(x)
 }
 
-# Hyperparameter generic:
+# Hyperparameter generic (BIG TODO):
 hyperparameters <- function(x) UseMethod("hyperparameters")
 hyperparameters.Inducer <- function(x) {
   x$hyperparameters
 }
 
 
-# Copy generic (helper function):
-copy <- function(original, new_hyperparameters) UseMethod("copy")
-copy.Inducer <- function(original, new_hyperparameters) {
-  # This helper method creates a "copy" (i.e. new instance of inducer class) of
-  # the original Inducer with the new hyperparameter configuration:
-  if (missing(new_hyperparameters)) {
-    return(original)
+#' @title copy an inducer.
+#' 
+#' @description generic for `Inducer` class that produces copies of instances of
+#' `Inducer` class that contain a new hyperparameter configuration.
+#'  
+#' @details This function creates a copy of the passed inducer with new config-
+#'  uration values. New configuration values which have not been passed during
+#'  initialization are added to the copy, while already present configuration
+#'  values are overwritten in the copy.
+#' 
+#' @param .inducer S3 object of class `Inducer`.
+#' @param new_configuration Named List, containing the hyperparameter
+#'  configuration
+#'
+#' @returns A new instance of class `Inducer` with new configuration values. If
+#'  no new configurations are passed, the original inducer is returned.
+#'
+#' @examples
+#' InducerXgboost <- InducerConstruct(configuration = list(nrounds = 100),
+#'                                    method = "Xgboost")
+#' NewInducerXgboost <- copy(InducerXgboost,
+#'                           new_configuration = list(nrounds = 20, max_depth = 6))
+#' print(NewInducerXgboost)
+#' NewInducerXgboost <- copy(InducerXgboost)
+#' print(NewInducerXgboost)
+#' @export
+copy <- function(.inducer, new_configuration) UseMethod("copy")
+copy.Inducer <- function(.inducer, new_configuration) {
+  # TO DO: Check validity of hyperparameters!
+  if (missing(new_configuration)) {
+    return(.inducer)
   }
-  assertList(new_hyperparameters, unique = TRUE)
-  # TODO: Assertion on hyperparameters?
-  modified_config <- original$configuration
-  modified_hyperparam <- original$hyperparameter
-  for (param_name in names(new_hyperparameters)) {
-    modified_config[[param_name]] <- new_hyperparameters[[param_name]]
-    if (!(param_name %in% modified_hyperparam)) {
-      modified_hyperparam <- c(modified_hyperparam, param_name)
-    }
+  assertList(new_configuration, unique = TRUE, names = "named")
+  modified_config <- .inducer$configuration
+  for (param_name in names(new_configuration)) {
+    modified_config[[param_name]] <- new_configuration[[param_name]]
   }
   # Create copy of the original Inducer with new configuration and hyperparams:
   NewInstance <- InducerConstructer(configuration = modified_config,
-                                    hyperparameters = modified_hyperparam,
-                                    method = original$method)
+                                    method = .inducer$method)
   return(NewInstance)
 }
 
 
-# Configuration generics:
+#' @title Accessor for the `configuration` of an inducer.
+#' 
+#' @param x S3 object of class inducer.
+#' 
+#' @returns Named list of hyperparameter configurations.
 configuration <- function(x) UseMethod("configuration")
 configuration.Inducer <- function(x) x$configuration
 
+
+#' @title Setter for the `configuration` of an inducer.
+#' 
+#' @description Set new configuration values for the hyperparameters of a given
+#'  inducer.
+#' 
 `configuration<-` <- function(object, value) {
   UseMethod("configuration<-", object)
 }
 `configuration<-` <- function(object, value) {
-  assertList(value, unique = TRUE)
-  if (anyNA(names(value))) {
-    stop("List of configuration values must have names for every hyperparameter!")
-  }
+  assertList(value, unique = TRUE, names = "named")
   object <- copy(object, value)
   return(object)
+}
+
+
+fit <- function(.inducer, .data,...) UseMethod("fit")
+Inducer <- function(.inducer, .data,...) {
+  argdots <- list(...)
+  if (any(!(.inducer$hyperparameters %in% names(argdots)))) {
+    print("Add additional hyperparameter")
+    configuration(.inducer) <- argdots
+  }
+  
+  # Call fit2 on specific inducer
+  
+  
+  # Returns an S3 object with the following fields:
+  # - model parameters
+  # - y: target variable used for fitting
+  # - X: data the model was trained on (w/o y)
+  # - inducer from input
+  # - configuration
 }
 
