@@ -29,7 +29,7 @@ Dataset <- function(data, target, name = deparse(substitute(data)), type) {
   }
   
   # Target should be the first column
-  data_ordered <- data[, c(target, setdiff(names(data), target))]
+  data_ordered <- data[, c(target, setdiff(names(data), target)), drop = FALSE]
   
   structure(list(
     data = data_ordered,
