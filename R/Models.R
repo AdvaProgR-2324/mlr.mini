@@ -5,22 +5,14 @@
 #' 
 #' @param model A model object
 #' @examples
+#' cars.data <- Dataset(data = cars, target = "dist")
+#' xgb <- InducerConstructer(configuration = list(nrounds = 10, verbose = 0), method = "XGBoost")
+#' model.xgb <- fit(xgb, cars.data)
 #' inducer(model.xgb)
 #' @export
 inducer <- function(model) {
-  # Input Checks 
-  # to do
-  
-  # extract information
-  # to do
-  inducer_name <- "XGBoost"
-  config <- c(10, 0)
-  names(config) <- c("nrounds", "verbose")
-  
-  cat("Inducer:", inducer_name, "\n")
-  cat("Configuration:", paste(names(config), "=", unlist(config), collapse = ", "), "\n")
-
-  invisible(list(inducer = inducer_name, configuration = config))
+  assertClass(model, "Model")
+  model$inducer
 }
 
 #' @title Configuration Information
@@ -30,17 +22,14 @@ inducer <- function(model) {
 #' 
 #' @param model A model object
 #' @examples
+#' cars.data <- Dataset(data = cars, target = "dist")
+#' xgb <- InducerConstructer(configuration = list(nrounds = 10, verbose = 0), method = "XGBoost")
+#' model.xgb <- fit(xgb, cars.data)
 #' configuration(model.xgb)
 #' @export
 configuration.Model <- function(model) {
-  # Input Checks
-  # to do
-  
-  # extract information
-  # to do
-  config <- list()
-  
-  return(config)
+  assertClass(model, "Model")
+  model$inducer$configuration
 }
 
 #' @title Model Object
@@ -50,13 +39,14 @@ configuration.Model <- function(model) {
 #' 
 #' @param model A model object
 #' @examples
+#' cars.data <- Dataset(data = cars, target = "dist")
+#' xgb <- InducerConstructer(configuration = list(nrounds = 10, verbose = 0), method = "XGBoost")
+#' model.xgb <- fit(xgb, cars.data)
 #' modelObject(model.xgb)
 #' @export
 modelObject <- function(model) {
-  # Input Checks
-  # to do
-  
-  return(model$xgboost)
+  assertClass(model, "Model")
+  return(model$model)
 }
 
 #' @title Model Info
@@ -70,7 +60,7 @@ modelObject <- function(model) {
 #' @export
 modelInfo <- function(model) {
   # Input Checks
-  # to do
+  assertClass(model, "Model")
   
   start_time <- Sys.time()
   
@@ -81,15 +71,6 @@ modelInfo <- function(model) {
   training_time_sec <- as.numeric(difftime(end_time, start_time, units = "secs"))
   
   return(list(training.time.sec = training_time_sec))
-}
-
-predict2 <- function(predictions) {
-  if (is.data.frame(newdata)) {
-    result <- predictions
-  } else {
-    result <- data.frame(prediction = predictions, truth = as.data.frame(newdata, columns = "target"))
-  }
-  return(result)
 }
 
 #' @title Predictions for ModelXGBoost
@@ -103,24 +84,24 @@ predict2 <- function(predictions) {
 #' @param type A character string specifying the type of prediction: "response", "se" (standard error), or "prob" (probability). The default is "response".
 #' 
 #' @examples
-#' model.xgb <- xgb(cars.data)
+#' cars.data <- Dataset(data = cars, target = "dist")
+#' xgb <- InducerConstructer(configuration = list(nrounds = 10, verbose = 0), method = "XGBoost")
+#' model.xgb <- fit(xgb, cars.data)
 #' predict(model.xgb, newdata = data.frame(speed = 10))
 #' prediction <- predict(model.xgb, newdata = cars.data[c(1, 2, 3, 4), ])
 #' prediction
 #' @export
 predict.ModelXGBoost <- function(model, ..., newdata, type = "response") {
   # Input Checks
-  # to do
+  assertClass(model, "ModelXGBoost")
   assertMultiClass(newdata, c("data.frame", "Dataset"))
   assertChoice(type, c("response", "se", "prob"))
   
   data <- if (is.data.frame(newdata)) newdata else as.data.frame(newdata)
   
   # select only the features
-  # data <- data[, "speed", drop = FALSE] # hard coded right now
-  data <- data[, modelObject(model.xgb)[["feature_names"]]]
+  data <- data[, modelObject(model)$feature_names, drop = FALSE]
   
-  # class(model) <- c("xgb.Booster") # need to delete this later
   predictions <- predict(modelObject(model), newdata = as.matrix(data))
   
   if (is.data.frame(newdata)) {
@@ -151,12 +132,11 @@ predict.ModelXGBoost <- function(model, ..., newdata, type = "response") {
 #' @export
 predict.ModelLm <- function(model, ..., newdata, type = "response") {
   # Input Checks
-  # to do
+  assertClass(model, "ModelLm")
   assertMultiClass(newdata, c("data.frame", "Dataset"))
   assertChoice(type, c("response", "se", "prob"))
   
   data <- if (is.data.frame(newdata)) newdata else as.data.frame(newdata)
-  # class(model) <- c("lm") # need to change this later
   predictions <- predict(modelObject(model), newdata = data)
   
   if (is.data.frame(newdata)) {
@@ -223,10 +203,15 @@ predict.ModelRandomForest <- function(model, ..., newdata, type = "response") {
   assertMultiClass(newdata, c("data.frame", "Dataset"))
   assertChoice(type, c("response", "se", "prob"))
   
-  data <- ifelse(is.data.frame(newdata), newdata, newdata$data)
-  predictions <- predict(model, newdata = data)
+  data <- if (is.data.frame(newdata)) newdata else as.data.frame(newdata)
+  predictions <- predict(modelObject(model), newdata = data)
   
-  predict2(predictions)
+  if (is.data.frame(newdata)) {
+    result <- predictions
+  } else {
+    result <- data.frame(prediction = predictions, truth = as.data.frame(newdata, columns = "target"))
+  }
+  return(result)
 }
 
 ## Classes
