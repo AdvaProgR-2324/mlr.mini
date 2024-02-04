@@ -1,3 +1,6 @@
+#' @include InducerXgboost.R
+
+
 # Constructer for Inducer Class:
 InducerConstructer <- function(configuration, method) {
   # TO DO: Check validity of hyperparameters!
@@ -144,3 +147,5 @@ print.Model <- function(x,...) {
 # meep
 # meep$inducer
 # meep$data
+# meep$model
+# meep$model$feature_names
