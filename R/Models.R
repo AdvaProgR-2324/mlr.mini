@@ -1,3 +1,8 @@
+library(checkmate)
+source("R/Dataset.R")
+source("R/Inducer.R")
+source("R/InducerXgboost.R")
+
 #' @title Inducer Information
 #' 
 #' @description
@@ -59,17 +64,9 @@ modelObject <- function(model) {
 #' modelInfo(model.xgb)
 #' @export
 modelInfo <- function(model) {
-  # Input Checks
   assertClass(model, "Model")
   
-  start_time <- Sys.time()
-  
-  # Train the model
-  # to do
-  
-  end_time <- Sys.time()
-  training_time_sec <- as.numeric(difftime(end_time, start_time, units = "secs"))
-  
+  training_time_sec <- model$training_time_sec
   return(list(training.time.sec = training_time_sec))
 }
 
@@ -142,7 +139,9 @@ predict.ModelLm <- function(object, ..., newdata, type = "response") {
   if (is.data.frame(newdata)) {
     result <- predictions
   } else {
-    result <- data.frame(prediction = predictions, truth = as.data.frame(newdata, columns = "target"))
+    result <-
+      data.frame(prediction = predictions,
+                 truth = as.data.frame(newdata, columns = "target"))
   }
   return(result)
 }
@@ -170,7 +169,7 @@ predict.ModelDummy <- function(object, ..., newdata, type = "response") {
   assertMultiClass(newdata, c("data.frame", "Dataset"))
   assertChoice(type, c("response", "se", "prob"))
   
-  data <- ifelse(is.data.frame(newdata), newdata, newdata$data)
+  data <- if (is.data.frame(newdata)) newdata else as.data.frame(newdata)
   
   if ("ModelRegression" %in% class(object)) {
     predictions <- mean(object$y)
@@ -181,7 +180,9 @@ predict.ModelDummy <- function(object, ..., newdata, type = "response") {
   if (is.data.frame(newdata)) {
     result <- predictions
   } else {
-    result <- data.frame(prediction = predictions, truth = as.data.frame(newdata, columns = "target"))
+    result <-
+      data.frame(prediction = predictions,
+                 truth = as.data.frame(newdata, columns = "target"))
   }
   return(result)
 }
@@ -214,9 +215,12 @@ predict.ModelRandomForest <- function(object, ..., newdata, type = "response") {
   if (is.data.frame(newdata)) {
     result <- predictions
   } else {
-    result <- data.frame(prediction = predictions, truth = as.data.frame(newdata, columns = "target"))
+    result <-
+      data.frame(prediction = predictions,
+                 truth = as.data.frame(newdata, columns = "target"))
   }
-  return(result)
+  return(result
+  )
 }
 
 ## Classes
