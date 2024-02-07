@@ -10,7 +10,6 @@ test_that("Test Dataset", {
   
   expect_error(cars.data[, "speed"])
   
-  ## Test metainfo (Test doesn't work yet)
   expect_equal(metainfo(cars.data)[1:6], list(
     name = "cars",
     features = c(speed = "num"),
