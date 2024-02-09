@@ -111,10 +111,10 @@ predict.ModelXGBoost <- function(object, ..., newdata, type = "response") {
   return(result)
 }
 
-#' @title Predictions for lm
+#' @title Predictions for glm
 #' 
 #' @description
-#' this function predicts the response variable using a trained lm model
+#' this function predicts the response variable using a trained glm model
 #' 
 #' @param object A model object
 #' @param ... Additional arguments
@@ -127,14 +127,27 @@ predict.ModelXGBoost <- function(object, ..., newdata, type = "response") {
 #' prediction <- predict(model.lm, newdata = cars.data[c(1, 2, 3, 4), ])
 #' prediction
 #' @export
-predict.ModelLm <- function(object, ..., newdata, type = "response") {
+predict.ModelGlm <- function(object, ..., newdata, type = "response") {
   # Input Checks
-  assertClass(object, "ModelLm")
+  assertClass(object, "ModelGlm")
   assertMultiClass(newdata, c("data.frame", "Dataset"))
   assertChoice(type, c("response", "se", "prob"))
   
+  if (type == "se" && "ModelClassification" %in% class(object)) {
+    stop("Standard errors are only applicable for regression models.")
+  } else if (type == "prob" && "ModelRegression" %in% class(object)) {
+    stop("Probability scores are only applicable for classification models.")
+  }
+  
   data <- if (is.data.frame(newdata)) newdata else as.data.frame(newdata)
-  predictions <- predict(modelObject(object), newdata = data, ...)
+  
+  if (type == "response") {
+    predictions <- predict(modelObject(object), newdata = data, ...)
+  } else if (type == "se") {
+    predictions <- predict(modelObject(object), newdata = data, se.fit = TRUE)$se.fit
+  } else if (type == "prob") {
+    # to do
+  }
   
   if (is.data.frame(newdata)) {
     result <- predictions
@@ -219,8 +232,7 @@ predict.ModelRandomForest <- function(object, ..., newdata, type = "response") {
       data.frame(prediction = predictions,
                  truth = as.data.frame(newdata, columns = "target"))
   }
-  return(result
-  )
+  return(result)
 }
 
 ## Classes
