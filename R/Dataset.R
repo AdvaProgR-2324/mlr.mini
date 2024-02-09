@@ -46,7 +46,7 @@ Dataset <- function(data, target, name = deparse(substitute(data)), type) {
 #' @param x A Dataset object
 #' @param ... Additional arguments
 #' @examples
-#' cars.data <- Dataset(data = cars, target = "dist")
+#' cars.data <- Dataset(data = cars[c(1, 2, 3, 4), ], target = "dist")
 #' print(cars.data)
 #' @export
 print.Dataset <- function(x, ...) {
@@ -104,8 +104,8 @@ print.Dataset <- function(x, ...) {
 #' @param columns Which columns to include in the data frame: "all", "target", "features". By default "all".
 #' 
 #' @examples
-#' cars.data <- Dataset(data = cars, target = "dist")
-#' head(as.data.frame(cars.data))
+#' cars.data <- Dataset(data = cars[c(1, 2, 3, 4), ], target = "dist")
+#' as.data.frame(cars.data)
 #' @export
 as.data.frame.Dataset <- function(x, row.names = NULL, optional = FALSE, ..., columns = "all") {
   # Input checks
@@ -132,7 +132,7 @@ metainfo <- function(x) {
 
 #' @title 'metainfo' method for Dataset objects
 #' 
-#' @description Get the metainfo of a Dataset object (name, features, targets, nrow, type, missings)
+#' @description Get the metainfo of a Dataset object (name, features, targets, number of observations, type, missing values)
 #' 
 #' @param x A Dataset object
 #' @examples
@@ -141,17 +141,26 @@ metainfo <- function(x) {
 #' @export
 metainfo.Dataset <- function(x) {
   get_class <- function(x) {
-    switch (class(x),
+    switch(
+      class(x),
       numeric = "num",
       character = "char",
       logical = "logi",
+      factor = "fact",
       "other"
     )
   }
   
   feature_names <- setdiff(names(x$data), x$target)
-  features <- get_class(x$data[, feature_names])
-  names(features) <- feature_names
+  if (length(feature_names) == 0) {
+    features <- NULL
+  } else if (length(feature_names) == 1) {
+    features <- get_class(x$data[, feature_names])
+    names(features) <- feature_names
+  } else if (length(feature_names) > 1) {
+    features <- sapply(x$data[, feature_names], get_class)
+    names(features) <- feature_names
+  }
   
   info <- list(
     name = x$name,
@@ -164,4 +173,3 @@ metainfo.Dataset <- function(x) {
   class(info) <- "DatasetInfo"
   return(info)
 }
-
