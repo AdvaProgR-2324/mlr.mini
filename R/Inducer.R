@@ -1,7 +1,7 @@
 #' @include InducerXgboost.R
 
-
-# Constructer for Inducer Class:
+#' @title Inducer S3 class
+#' @export
 InducerConstructer <- function(configuration, method) {
   # TO DO: Check validity of hyperparameters!
   assertList(configuration, names = "named")
@@ -22,7 +22,7 @@ InducerConstructer <- function(configuration, method) {
 #'  
 #'  @description
 #'  print information about inducer.
-#'  
+#'  @export
 print.Inducer <- function(x,...) {
   config <- do.call(paste, c(list(x$hyperparameters, x$configuration),
                              list(sep=" = ", collapse=", ")))
@@ -37,8 +37,6 @@ hyperparameters.Inducer <- function(x) {
 }
 
 
-
-copy <- function(.inducer, new_configuration) UseMethod("copy")
 
 #' @title Create copy of an inducer.
 #' 
@@ -66,6 +64,7 @@ copy <- function(.inducer, new_configuration) UseMethod("copy")
 #' NewInducerXgboost <- copy(InducerXgboost)
 #' print(NewInducerXgboost)
 #' @export
+copy <- function(.inducer, new_configuration) UseMethod("copy")
 copy.Inducer <- function(.inducer, new_configuration) {
   # TO DO: Check validity of hyperparameters!
   if (missing(new_configuration)) {
@@ -83,11 +82,12 @@ copy.Inducer <- function(.inducer, new_configuration) {
 }
 
 
-configuration <- function(x) UseMethod("configuration")
 
 #' @title Accessor for the `configuration` of an inducer.
 #' @param x S3 object of class inducer.
 #' @returns Named list of hyperparameter configurations.
+#' @export
+configuration <- function(x) UseMethod("configuration")
 configuration.Inducer <- function(x) x$configuration
 
 
@@ -106,6 +106,12 @@ configuration.Inducer <- function(x) x$configuration
 
 
 
+#' @title Fit a model defined by an `Inducer` object on data defined by a `Dataset`
+#'     object.
+#' @param .inducer S3 object of class Inducer.
+#' @param .data S3 object of class Dataset.
+#' @returns S3 object of class `Model`.
+#' @export
 fit <- function(.inducer, .data,...) UseMethod("fit")
 fit.Inducer <- function(.inducer, .data, ...) {
   assertClass(.inducer, classes = c("Inducer"))
