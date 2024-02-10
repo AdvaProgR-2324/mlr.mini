@@ -23,6 +23,7 @@ Dataset <- function(data, target, name = deparse(substitute(data)), type) {
   if (missing(type)) {
     type <- if (is.numeric(data[[target]])) {
       "regression"
+    # else if (is.factor(data[[target]])) "classification"
     } else {
       "classification"
     }

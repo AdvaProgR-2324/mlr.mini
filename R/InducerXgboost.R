@@ -24,6 +24,7 @@ fit2.InducerXgboost <- function(.inducer, task, training_data, response) {
   if (task == "Regression") {
     objective <- "reg:squarederror"
   } else if (task == "Classification") {
+    training_data[[response]] <- as.factor(training_data[[response]])
     if (nlevels(training_data[[response]]) == 2) {
         objective <-"binary:logistic"
         task <- "Binary Classification"
@@ -31,7 +32,6 @@ fit2.InducerXgboost <- function(.inducer, task, training_data, response) {
         objective <-"multi:softprob"
         task <- "Multiclass Classification"
     }
-    training_data[[response]] <- as.factor(training_data[[response]])
   }
   
   # Preparation of the data (XGBoost manages only numeric vectors!):

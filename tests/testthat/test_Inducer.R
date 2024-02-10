@@ -21,6 +21,6 @@ test_that("Test InducerXgboost", {
                list(nrounds = 100, max_depth = 6, eta = 0.3))
   configuration(InducerXgboost) <- list(nrounds = 10, max_depth = 4, verbose = 0)
   expect_equal(configuration(InducerXgboost),
-               list(nrounds = 10, max_depth = 4, verbose = 0))
+               list(nrounds = 10, max_depth = 4, eta = 0.3, verbose = 0))
   
 })

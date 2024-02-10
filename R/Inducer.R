@@ -38,8 +38,6 @@ hyperparameters.Inducer <- function(x) {
 
 
 
-copy <- function(.inducer, new_configuration) UseMethod("copy")
-
 #' @title Create copy of an inducer.
 #' 
 #' @description generic for `Inducer` class that produces copies of instances of
@@ -66,6 +64,8 @@ copy <- function(.inducer, new_configuration) UseMethod("copy")
 #' NewInducerXgboost <- copy(InducerXgboost)
 #' print(NewInducerXgboost)
 #' @export
+copy <- function(.inducer, new_configuration) UseMethod("copy")
+
 copy.Inducer <- function(.inducer, new_configuration) {
   # TO DO: Check validity of hyperparameters!
   if (missing(new_configuration)) {
@@ -83,13 +83,12 @@ copy.Inducer <- function(.inducer, new_configuration) {
 }
 
 
-configuration <- function(x) UseMethod("configuration")
-
 #' @title Accessor for the `configuration` of an inducer.
 #' @param x S3 object of class inducer.
 #' @returns Named list of hyperparameter configurations.
-configuration.Inducer <- function(x) x$configuration
+configuration <- function(x) UseMethod("configuration")
 
+configuration.Inducer <- function(x) x$configuration
 
 #' @title Setter for the `configuration` of an inducer.
 #' @description Set new configuration values for the hyperparameters of a given
