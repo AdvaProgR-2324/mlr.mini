@@ -18,7 +18,7 @@ InducerConstructer <- function(configuration, method) {
   Inducer
 }
 
-#'  @title print Inducer.
+#'  @title print method for `Inducer`-class.
 #'  
 #'  @description
 #'  print information about inducer.
