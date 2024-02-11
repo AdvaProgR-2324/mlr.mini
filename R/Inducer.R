@@ -55,7 +55,7 @@ print.Inducer <- function(x,...) {
 #'  no new configurations are passed, the original inducer is returned.
 #'
 #' @examples
-#' InducerXgboost <- InducerConstruct(configuration = list(nrounds = 100),
+#' InducerXgboost <- InducerConstructer(configuration = list(nrounds = 100),
 #'                                    method = "Xgboost")
 #' NewInducerXgboost <- copy(InducerXgboost,
 #'                           new_configuration = list(nrounds = 20, max_depth = 6))
@@ -156,7 +156,7 @@ fit.Inducer <- function(.inducer, .data, ...) {
       model = model,
       task = task
     ),
-    class = "Model"
+    class = c(paste0("Model", .inducer), paste0("Model", task), "Model")
   )
 }
 

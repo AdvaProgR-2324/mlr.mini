@@ -18,10 +18,17 @@ Config/testthat/edition: 3
 Config/testthat/parallel: true
 Roxygen: list(markdown = TRUE)
 Imports:
-  checkmate
-  Matrix
-  stringr
+  checkmate,
+  Matrix,
+  stringr,
   xgboost
 Suggests:
   testthat
 RoxygenNote: 7.3.0
+Collate: 
+    'Dataset.R'
+    'constructFormula.R'
+    'InducerXgboost.R'
+    'Inducer.R'
+    'Models.R'
+    'zzz.R'
