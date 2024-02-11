@@ -18,7 +18,7 @@ InducerConstructer <- function(configuration, method) {
   Inducer
 }
 
-#'  @title print method for `Inducer`-class.
+#'  @title print method for `Inducer` class.
 #'  
 #'  @description
 #'  print information about inducer.
@@ -30,18 +30,17 @@ print.Inducer <- function(x,...) {
   invisible(x)
 }
 
-# Hyperparameter generic (BIG TODO):
-hyperparameters <- function(x) UseMethod("hyperparameters")
-hyperparameters.Inducer <- function(x) {
-  x$hyperparameters
-}
+# # Hyperparameter generic (BIG TODO):
+# hyperparameters <- function(x) UseMethod("hyperparameters")
+# hyperparameters.Inducer <- function(x) {
+#   x$hyperparameters
+# }
 
 
 
 #' @title Create copy of an inducer.
 #' 
-#' @description generic for `Inducer` class that produces copies of instances of
-#' `Inducer` class that contain a new hyperparameter configuration.
+#' @description S3 generic.
 #'  
 #' @details This function creates a copy of the passed inducer with new config-
 #'  uration values. New configuration values which have not been passed during
@@ -65,6 +64,13 @@ hyperparameters.Inducer <- function(x) {
 #' print(NewInducerXgboost)
 #' @export
 copy <- function(.inducer, new_configuration) UseMethod("copy")
+
+#' @title Copy an inducer.
+#' @description
+#' Method that produces copies of instances of `Inducer` class that contain a
+#' new hyperparameter configuration.
+#' 
+#' @export
 copy.Inducer <- function(.inducer, new_configuration) {
   # TO DO: Check validity of hyperparameters!
   if (missing(new_configuration)) {
@@ -84,20 +90,28 @@ copy.Inducer <- function(.inducer, new_configuration) {
 
 
 #' @title Accessor for the `configuration` of an inducer.
+#' @description
+#' S3 generic
+#' 
 #' @param x S3 object of class inducer.
 #' @returns Named list of hyperparameter configurations.
 #' @export
 configuration <- function(x) UseMethod("configuration")
+
+#' @title Access `configuration` of an inducer.
+#' @export 
 configuration.Inducer <- function(x) x$configuration
 
 
 #' @title Setter for the `configuration` of an inducer.
-#' @description Set new configuration values for the hyperparameters of a given
+#' @description S3 generic. Set new configuration values for the hyperparameters of a given
 #'  inducer.
 #' @export
 `configuration<-` <- function(object, value) {
   UseMethod("configuration<-", object)
 }
+#' @title Set `configuration` of an inducer.
+#' @export
 `configuration<-` <- function(object, value) {
   assertList(value, unique = TRUE, names = "named")
   object <- copy(object, value)
@@ -106,13 +120,17 @@ configuration.Inducer <- function(x) x$configuration
 
 
 
-#' @title Fit a model defined by an `Inducer` object on data defined by a `Dataset`
-#'     object.
+#' @title S3 generic for model fit on inducers.
+#' 
 #' @param .inducer S3 object of class Inducer.
 #' @param .data S3 object of class Dataset.
 #' @returns S3 object of class `Model`.
 #' @export
 fit <- function(.inducer, .data,...) UseMethod("fit")
+
+#' @title Fit a model defined by an `Inducer` object on data defined by a `Dataset`
+#'     object.
+#' @export
 fit.Inducer <- function(.inducer, .data, ...) {
   assertClass(.inducer, classes = c("Inducer"))
   assertClass(.data, classes = c("Dataset"))
@@ -142,6 +160,8 @@ fit.Inducer <- function(.inducer, .data, ...) {
   )
 }
 
+#' @title print method for `Model` class
+#' @export
 print.Model <- function(x,...) {
   cat(sprintf('%s Model: "%s" fitted on "%s" dataset.', x$task, x$inducer$method,
           x$data$name))
