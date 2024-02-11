@@ -32,9 +32,9 @@ inducer <- function(model) {
 #' model.xgb <- fit(xgb, cars.data)
 #' configuration(model.xgb)
 #' @export
-configuration.Model <- function(model) {
-  assertClass(model, "Model")
-  model$inducer$configuration
+configuration.Model <- function(x) {
+  assertClass(x, "Model")
+  x$inducer$configuration
 }
 
 #' @title Model Object
