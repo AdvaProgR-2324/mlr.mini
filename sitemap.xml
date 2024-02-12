@@ -19,10 +19,46 @@
     <loc>/reference/Dataset.html</loc>
   </url>
   <url>
+    <loc>/reference/InducerConstructer.html</loc>
+  </url>
+  <url>
     <loc>/reference/as.data.frame.Dataset.html</loc>
   </url>
   <url>
+    <loc>/reference/configuration-set.html</loc>
+  </url>
+  <url>
+    <loc>/reference/configuration.Inducer.html</loc>
+  </url>
+  <url>
+    <loc>/reference/configuration.Model.html</loc>
+  </url>
+  <url>
+    <loc>/reference/configuration.html</loc>
+  </url>
+  <url>
+    <loc>/reference/copy.Inducer.html</loc>
+  </url>
+  <url>
+    <loc>/reference/copy.html</loc>
+  </url>
+  <url>
+    <loc>/reference/fit.Inducer.html</loc>
+  </url>
+  <url>
+    <loc>/reference/fit.html</loc>
+  </url>
+  <url>
+    <loc>/reference/fit2.InducerXGBoost.html</loc>
+  </url>
+  <url>
+    <loc>/reference/fit2.html</loc>
+  </url>
+  <url>
     <loc>/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/inducer.html</loc>
   </url>
   <url>
     <loc>/reference/metainfo.Dataset.html</loc>
@@ -34,7 +70,31 @@
     <loc>/reference/mlr.mini-package.html</loc>
   </url>
   <url>
+    <loc>/reference/modelInfo.html</loc>
+  </url>
+  <url>
+    <loc>/reference/modelObject.html</loc>
+  </url>
+  <url>
+    <loc>/reference/predict.ModelDummy.html</loc>
+  </url>
+  <url>
+    <loc>/reference/predict.ModelGlm.html</loc>
+  </url>
+  <url>
+    <loc>/reference/predict.ModelRandomForest.html</loc>
+  </url>
+  <url>
+    <loc>/reference/predict.ModelXGBoost.html</loc>
+  </url>
+  <url>
     <loc>/reference/print.Dataset.html</loc>
+  </url>
+  <url>
+    <loc>/reference/print.Inducer.html</loc>
+  </url>
+  <url>
+    <loc>/reference/print.Model.html</loc>
   </url>
   <url>
     <loc>/reference/sub-.Dataset.html</loc>
