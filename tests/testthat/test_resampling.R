@@ -1,8 +1,9 @@
 test_that("test resampling", {
   cars.data <- Dataset(data = cars, target = "dist")
   
-  cv5 <- splt$cv(folds = 5)
+  cv5 <- splt$cv(folds = 5, repeats = 3)
   
+  expect_true(identical(splt$cv, SplitCV))
   expect_s3_class(cv5, "SplitCV")
   expect_s3_class(cv5, "Split")
   
@@ -11,6 +12,6 @@ test_that("test resampling", {
   expect_s3_class(cars.split, "SplitInstanceCV")
   expect_s3_class(cars.split, "SplitInstance")
   
-  expect_equal(length(cars.split), 5)
+  expect_equal(length(cars.split), 15)
   
 })

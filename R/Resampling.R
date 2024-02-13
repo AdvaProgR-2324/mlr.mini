@@ -11,6 +11,7 @@
 #' 
 Split <- function(data){
   # Assertion
+  assertClass(data, "Dataset")
   
   # extract the name of the data
   name <- data$name
@@ -44,7 +45,7 @@ SplitCV <- function(folds, repeats = 1){
   
   # define the split function
   Spl <- function(data){
-    
+  
     x <- Split(data)
     
     nbr_row <- x$nrow
@@ -55,23 +56,23 @@ SplitCV <- function(folds, repeats = 1){
     n_validation <- nbr_row - n_train
     
     # the list of all splits
-    all_split <- vector("list", length = folds)
+    split_indices_list <- list()
     
-    for(i in seq_len(folds)) {
+    for(r in 1:repeats){
       
-      training <- sample(nbr_row, size = n_train, replace = FALSE)
+      fold_indices <- rep(1:folds, length.out = nbr_row)
+      split_indices <- split(sample(nbr_row, size = nbr_row, replace = FALSE), fold_indices)
+      
+     for(i in 1:folds) {
+      
+      training <- split_indices[[i]]
       validation <- setdiff(seq_len(nbr_row), training)
-      all_split[[i]] <- list(training = training,
+      split_indices_list[[paste0("repeat_", r, "_fold_", i)]] <- list(training = training,
                           validation = validation)
+     }
     }
     
-    # add futher arguments to the all_split list
-    all_split[["folds"]] <- folds
-    all_split[["repeats"]] <- repeats
-    all_split[["name"]] <- x$name
-    all_split[["nbr_row"]] <- nbr_row
-    
-    structure(all_split,
+    structure(split_indices_list,
     class = c("SplitInstanceCV", "SplitInstance")
     )
   }
@@ -101,8 +102,20 @@ splt$cv <- SplitCV
 #' @export
 #' 
 print.SplitInstance <- function(x){
-  cat("CV Split Instance of the \"", x$name, ", dataset (", x$nbr_row, " rows)\n", sep = "")
-  cat("Configuration: folds = ", x$folds, ", repeats = ", x$repeats, "\n", sep = "")
+  
+  # number of rows in the dataset
+  rows <- length(x[[1]]$validation) + length(x[[1]]$training)
+  
+  folds <- rows / length(x[[1]]$training)
+  repeats <- length(x) / folds
+  
+  name <- deparse(substitute(x))
+  
+  # Split the string by dot and extract he name
+  name <- strsplit(name, "\\.")[[1]][1]
+
+  cat("CV Split Instance of the \"", name, ", dataset (", rows, " rows)\n", sep = "")
+  cat("Configuration: folds = ", folds, ", repeats = ", repeats, "\n", sep = "")
   invisible(x)
 }
 
@@ -136,24 +149,11 @@ hyperparameters.SplitConstructorCV <- function(x){
 
 
 
-#' @title 'length' method for "SplitInstanceCV"/"SplitInstance" objects
-#' 
-#' @description Get the length/the number of Split of a "SplitInstanceCV" "SplitInstance" object
-#' 
-#' @param x A SplitCV/SplitConstructorCV object
-#' @examples
-#' length(cars.split)
-#' @export
-length.SplitInstance <- function(x){
-  return(x$folds)
-}
 
-#' Example
-#' 
 cars.data <- Dataset(data = cars, target = "dist")
 identical(splt$cv, SplitCV)
 hyperparameters(splt$cv)
-cv5 <- splt$cv(folds = 5)
+cv5 <- splt$cv(folds = 5, repeats = 1)
 class(cv5)
 cars.split <- cv5(cars.data)
 cars.split
