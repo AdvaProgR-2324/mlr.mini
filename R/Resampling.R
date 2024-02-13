@@ -147,16 +147,3 @@ hyperparameters.SplitConstructorCV <- function(x){
                 range = c("[2, Inf]", "[1, Inf]"))
 }
 
-
-
-
-cars.data <- Dataset(data = cars, target = "dist")
-identical(splt$cv, SplitCV)
-hyperparameters(splt$cv)
-cv5 <- splt$cv(folds = 5, repeats = 1)
-class(cv5)
-cars.split <- cv5(cars.data)
-cars.split
-class(cars.split)
-length(cars.split)
-cars.split[[1]]
