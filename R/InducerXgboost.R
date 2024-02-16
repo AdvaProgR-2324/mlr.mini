@@ -5,7 +5,7 @@
 #' @description This internal function uses an inducer of class `InducerXgboost`
 #'  to fit an XGboost model to the given training dataset.
 #'
-#' @param .inducer An S3 object of class `InducerXGboost`.
+#' @param .inducer An S3 object of class `InducerXGBoost`.
 #' @param training_data Data.Frame or Matrix extracted from the `data` field
 #'  of the `Dataset` class.
 #' @param response String that stores the name of the target variable and is
@@ -17,8 +17,12 @@
 fit2 <- function(.inducer, task, training_data, response) UseMethod("fit2")
 
 #' @title Fit an XGBoost model.
+#' @param .inducer An S3 object of class `InducerXGBoost`.
+#' @param task String that is either of value `"regression"` or `"classification"`
+#' @param training_data Data.Frame extracted from the `data` field of the `Dataset` class.
+#' @param response String that stores the name of the target variable
 #' @export
-fit2.InducerXgboost <- function(.inducer, task, training_data, response) {
+fit2.InducerXGBoost <- function(.inducer, task, training_data, response) {
   
   # Define objective based on the task:
   if (task == "Regression") {
