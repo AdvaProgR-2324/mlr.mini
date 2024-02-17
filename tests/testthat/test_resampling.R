@@ -7,6 +7,7 @@ test_that("test resampling", {
   expect_s3_class(cv5, "SplitCV")
   expect_s3_class(cv5, "Split")
   
+  
   cars.split <- cv5(cars.data)
   
   expect_s3_class(cars.split, "SplitInstanceCV")

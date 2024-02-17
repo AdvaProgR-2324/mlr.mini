@@ -136,7 +136,7 @@ hyperparameters <- function(x){
 #' 
 #' @description Get the hyperparameters information of a Split object
 #' 
-#' @param x A SplitCV/SplitConstructorCV object
+#' @param x a SplitCV/SplitConstructorCV object
 #' @examples
 #' hyperparameters(splt$cv)
 #' @export
@@ -147,3 +147,44 @@ hyperparameters.SplitConstructorCV <- function(x){
                 range = c("[2, Inf]", "[1, Inf]"))
 }
 
+
+#' @title 'resample' method for SplitCV objects
+#' 
+#' @description method that creates a ResamplePrediction. It contain the relevant 
+#' result information of a resampling: the predictions made, the relevant ground 
+#' truth values, and possibly the training tasks and trained model for each fold
+#' 
+#' @param data A Dataset object
+#' @param inducer An Inducer Object
+#' @param split_cv The split method
+#' @examples
+#' resample(cars.data, xgb, splitCV(folds = 5))
+#' @export
+#' 
+resample <- function(data, inducer, split_cv) {
+  assertClass(data, "Dataset")
+  assertClass(inducer, "Inducer")
+  
+  results <- list()
+  
+  for (split in names(split_cv)) {
+    train_data <- split_cv[[split]]$train
+    validation_data <- split_cv[[split]]$validation
+    
+    # Apply inducer to the training data
+    model <- inducer(train_data)
+    
+    # Evaluate the model on the validation data
+    # You need to replace this part with your evaluation code
+    # For example, you might use predict() and some performance metric
+    validation_predictions <- predict(model, validation_data)
+    
+    # Store the results
+    results[[split]] <- list(
+      model = model,
+      predictions = validation_predictions
+    )
+  }
+  
+  results
+}
