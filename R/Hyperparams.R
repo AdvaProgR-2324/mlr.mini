@@ -5,16 +5,15 @@
 #' hpx <- hp(x = p_num(0, 1), y = p_int(1, Inf), z = p_fct(letters))
 #' hpx
 #' @export
-
 hp <- function(...) {
   name <- names(list(...))
-  type <- sapply(list(...), function(x) x[[1]])
-  range <- sapply(list(...), function(x) x[[2]])
+  type <- lapply(list(...), function(x) x[[1]])
+  range <- lapply(list(...), function(x) x[[2]])
+  
+  data <- data.frame(name = name, type = unlist(type), range = I(range), stringsAsFactors = FALSE)
   
   structure(list(
-    name = name,
-    type = type,
-    range = range
+    data = data
   ), class = "hp")
 }
 
@@ -26,18 +25,19 @@ hp <- function(...) {
 #' @examples
 #' hpCheck(list(x = 1, y = 1, z = "a"), hpx)
 #' @export
+
 hpCheck <- function(check, hp) {
   assert_list(check)
   assert_class(hp, "hp")
-  
+
   ret <- TRUE
-  
+
   for (i in names(check)) {
-    type <- hp$type[i == hp$name]
+    type <- hp$data$type[i == hp$data$name]
     temp <- switch(type,
-           num = check_numeric(check[[i]], lower = hp$range[[i]][1], upper = hp$range[[i]][2]),
-           int = check_integerish(check[[i]], lower = hp$range[[i]][1], upper = hp$range[[i]][2]),
-           fct = check_choice(check[[i]], choices = unlist(hp$range[[i]])))
+           num = check_numeric(check[[i]], lower = hp$data$range[[i]][1], upper = hp$data$range[[i]][2]),
+           int = check_integerish(check[[i]], lower = hp$data$range[[i]][1], upper = hp$data$range[[i]][2]),
+           fct = check_choice(check[[i]], choices = unlist(hp$data$range[[i]])))
     if (temp != TRUE) {
       return(temp) # to return all errors replace with print()
       ret <- FALSE
