@@ -50,14 +50,37 @@ fit2.InducerXGBoost <- function(.inducer, task, training_data, response) {
 }
 
 
-# Later:
-# InducerXgboost <- function(.data, ...) {
-#   if (missing(.data)) {
-#     self <- sys.function()
-#     args <- as.list(sys.call())[-1]
-#     formals(self)[names(args)] <- as.pairlist(args)
-#     self
-#   } else {
-#     fit(InducerXgboost, ...)
-#   }
-# }
+#' @title Construct or fit an XGBoost Inducer.
+#' 
+#' @param .data Object of class `Dataset`. Optional.
+#' @param ... Additional parameters specifying the hyperparameter configuration
+#' of the XGBoost model. If none are given, the default configuration of
+#' `xgboost::xgboost` is used for the model fitting process.
+#' 
+#' @returns A S3 object of either class `Model` (`.data` was given) or of class
+#' `InducerXGBoost` (`.data` was not given).
+#' 
+#' @details
+#' If `.data` argument is passed, an XGBoost model will be trained on the given
+#' dataset using the passed hyperparameter configuration. Otherwise, an inducer of
+#' class `InducerXGBoost` is created with the given hyperparameter configuration.
+#' 
+#' @examples
+#' InducerXGBoost()
+#' InducerXGBoost(verbose = 0)
+#' cars.data <- Dataset(data = cars, target = "dist")
+#' InducerXGBoost(cars.data, verbose = 0, nrounds = 10)
+#' 
+#' @export 
+InducerXGBoost <- function(.data, ...) {
+    self <- sys.function()
+    args <- as.list(sys.call())[-1]
+    formals(self)[names(args)] <- as.pairlist(args)
+    InducerXGBoost <- InducerConstructer(configuration = args,
+                                         method = "XGBoost")
+    if (missing(.data)) {
+      return(InducerXGBoost)
+    } else {
+      fit(InducerXGBoost, .data = .data, ...)
+    }
+}
