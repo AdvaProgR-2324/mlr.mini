@@ -19,6 +19,7 @@ Config/testthat/parallel: true
 Roxygen: list(markdown = TRUE)
 Imports:
   checkmate
+  pROC
 Suggests:
   testthat
 RoxygenNote: 7.3.0
