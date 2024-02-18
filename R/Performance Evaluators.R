@@ -1,7 +1,10 @@
 #Performance Evaluators
 EvaluatorMAE <- function(.prediction, .dataset = NULL, .model = NULL, ...) {
+  if (is.null(.dataset)) {
+    stop("Dataset must be provided for MAE evaluation.")
+  }
   # Assuming .prediction is a vector of predictions and 
-  # the actual values are in .dataset$actual (modify as needed)
+  # the actual values are in .dataset$actual 
   mean(abs(.prediction - .dataset$actual))
 }
 
@@ -15,15 +18,57 @@ evl <- new.env()
 
 evl$mae <- EvaluatorMAE
 
-# Example usage
-prediction <- c(1, 2, 3)  # Example prediction values
-actual <- c(1, 2, 4)      # Example actual values
+EvaluatorRMSE <- function(.prediction, .dataset = NULL, .model = NULL, ...) {
+  if (is.null(.dataset)) {
+    stop("Dataset must be provided for RMSE evaluation.")
+  }
+  sqrt(mean((.prediction - .dataset$actual)^2))
+}
 
-# Create a dataset (modify this according to your actual data structure)
-dataset <- data.frame(actual = actual)
+class(EvaluatorRMSE) <- c("EvaluatorRMSE", class(EvaluatorRMSE))
+print.EvaluatorRMSE <- function(x, ...) {
+  cat("Evaluator: Root Mean Squared Error\n")
+  cat("Configuration: ()\n")
+}
 
-# Using the evaluator
-mae_result <- evl$mae(prediction, dataset)
-print(mae_result)
+evl$rmse <- EvaluatorRMSE
 
-identical(evl$mae, EvaluatorMAE)
+EvaluatorAccuracy <- function(.prediction, .dataset = NULL, .model = NULL, ...) {
+  if (is.null(.dataset)) {
+    stop("Dataset must be provided for Accuracy evaluation.")
+  }
+  mean(.prediction == .dataset$actual)
+}
+
+class(EvaluatorAccuracy) <- c("EvaluatorAccuracy", class(EvaluatorAccuracy))
+print.EvaluatorAccuracy <- function(x, ...) {
+  cat("Evaluator: Accuracy\n")
+  cat("Configuration: ()\n")
+}
+
+evl$accuracy <- EvaluatorAccuracy
+
+EvaluatorAUC <- function(.prediction, .dataset = NULL, .model = NULL, ...) {
+  if (is.null(.dataset)) {
+    stop("Dataset must be provided for AUC evaluation.")
+  }
+  
+  requireNamespace("pROC", quietly = TRUE)
+  roc_response <- pROC::roc(.dataset$actual, .prediction)
+  pROC::auc(roc_response)
+}
+
+class(EvaluatorAUC) <- c("EvaluatorAUC", class(EvaluatorAUC))
+print.EvaluatorAUC <- function(x, ...) {
+  cat("Evaluator: Area Under the ROC Curve\n")
+  cat("Configuration: ()\n")
+}
+
+evl$auc <- EvaluatorAUC
+
+
+# Generic evaluate function
+evaluate <- function(evaluator, .prediction, .dataset = NULL, .model = NULL, ...) {
+  evaluator(.prediction, .dataset, .model, ...)
+}
+
