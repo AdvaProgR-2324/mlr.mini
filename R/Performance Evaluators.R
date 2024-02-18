@@ -18,6 +18,7 @@ evl <- new.env()
 
 evl$mae <- EvaluatorMAE
 
+
 EvaluatorRMSE <- function(.prediction, .dataset = NULL, .model = NULL, ...) {
   if (is.null(.dataset)) {
     stop("Dataset must be provided for RMSE evaluation.")
@@ -71,4 +72,5 @@ evl$auc <- EvaluatorAUC
 evaluate <- function(evaluator, .prediction, .dataset = NULL, .model = NULL, ...) {
   evaluator(.prediction, .dataset, .model, ...)
 }
+
 
