@@ -22,6 +22,12 @@
     <loc>/reference/InducerConstructer.html</loc>
   </url>
   <url>
+    <loc>/reference/Split.html</loc>
+  </url>
+  <url>
+    <loc>/reference/SplitCV.html</loc>
+  </url>
+  <url>
     <loc>/reference/as.data.frame.Dataset.html</loc>
   </url>
   <url>
@@ -53,6 +59,12 @@
   </url>
   <url>
     <loc>/reference/fit2.html</loc>
+  </url>
+  <url>
+    <loc>/reference/hyperparameters.SplitConstructorCV.html</loc>
+  </url>
+  <url>
+    <loc>/reference/hyperparameters.html</loc>
   </url>
   <url>
     <loc>/reference/index.html</loc>
@@ -95,6 +107,21 @@
   </url>
   <url>
     <loc>/reference/print.Model.html</loc>
+  </url>
+  <url>
+    <loc>/reference/print.SplitInstance.html</loc>
+  </url>
+  <url>
+    <loc>/reference/resample.html</loc>
+  </url>
+  <url>
+    <loc>/reference/set_class_SplitCV.html</loc>
+  </url>
+  <url>
+    <loc>/reference/splt.html</loc>
+  </url>
+  <url>
+    <loc>/reference/store_SplitCV_in_environment.html</loc>
   </url>
   <url>
     <loc>/reference/sub-.Dataset.html</loc>
