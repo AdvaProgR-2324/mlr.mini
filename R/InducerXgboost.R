@@ -2,7 +2,7 @@
 
 #' @title Fit an XGBoost model.
 #' 
-#' @description This internal function uses an inducer of class `InducerXgboost`
+#' @description This internal function uses an inducer of class `InducerXGBoost`
 #'  to fit an XGboost model to the given training dataset.
 #'
 #' @param .inducer An S3 object of class `InducerXGBoost`.
@@ -13,14 +13,6 @@
 #' @param task String that is either of value `"regression"` or `"classification"`
 #'
 #' @details We use `xgboost::xgboost()` for the model fitting.
-#' @export
-fit2 <- function(.inducer, task, training_data, response) UseMethod("fit2")
-
-#' @title Fit an XGBoost model.
-#' @param .inducer An S3 object of class `InducerXGBoost`.
-#' @param task String that is either of value `"regression"` or `"classification"`
-#' @param training_data Data.Frame extracted from the `data` field of the `Dataset` class.
-#' @param response String that stores the name of the target variable
 #' @export
 fit2.InducerXGBoost <- function(.inducer, task, training_data, response) {
   
@@ -44,9 +36,11 @@ fit2.InducerXGBoost <- function(.inducer, task, training_data, response) {
   sparse_matrix <- Matrix::sparse.model.matrix(update(form, . ~ . - 1), data = training_data)
   
   # Train the model:
-  do.call(xgboost::xgboost,
-          c(list(data = sparse_matrix, label = training_data[[response]], objective = objective),
-            configuration(.inducer)))
+  do.call(
+    xgboost::xgboost,
+    c(list(data = sparse_matrix, label = training_data[[response]], objective = objective),
+      configuration(.inducer))
+  )
 }
 
 
@@ -76,11 +70,11 @@ InducerXGBoost <- function(.data, ...) {
     self <- sys.function()
     args <- as.list(sys.call())[-1]
     formals(self)[names(args)] <- as.pairlist(args)
-    InducerXGBoost <- InducerConstructer(configuration = args,
+    inducer <- InducerConstructer(configuration = args,
                                          method = "XGBoost")
     if (missing(.data)) {
-      return(InducerXGBoost)
+      return(inducer)
     } else {
-      fit(InducerXGBoost, .data = .data, ...)
+      fit(inducer, .data = .data, ...)
     }
 }
