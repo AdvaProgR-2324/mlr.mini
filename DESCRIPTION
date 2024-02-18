@@ -31,4 +31,5 @@ Collate:
     'InducerXgboost.R'
     'Inducer.R'
     'Models.R'
+    'Resampling.R'
     'zzz.R'

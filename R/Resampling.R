@@ -80,13 +80,16 @@ SplitCV <- function(folds, repeats = 1){
   return(Spl)
 }
 
-#' set the class of the SplitCV object
+#' @name set_class_SplitCV
+#' @title set the class of the SplitCV object
 class(SplitCV) <- c("SplitConstructorCV", "SplitConstructor", "function")
 
 #' Create an environment for storing Split objects
+#' @export
 splt <- new.env()
 
-#' store the SplitCV object cv to the environment
+#' @name store_SplitCV_in_environment
+#' @title the SplitCV object cv to the environment
 splt$cv <- SplitCV
 
 
@@ -97,11 +100,13 @@ splt$cv <- SplitCV
 #' @param x A SplitInstance objec
 #' @param ... Additional arguments
 #' @examples
+#' cars.data <- Dataset(data = cars, target = "dist")
+#' cv5 <- splt$cv(folds = 5)
 #' cars.split <- cv5(cars.data)
-#' print(cars.data)
+#' print(cars.split)
 #' @export
 #' 
-print.SplitInstance <- function(x){
+print.SplitInstance <- function(x, ...){
   
   # number of rows in the dataset
   rows <- length(x[[1]]$validation) + length(x[[1]]$training)
@@ -158,7 +163,10 @@ hyperparameters.SplitConstructorCV <- function(x){
 #' @param inducer An Inducer Object
 #' @param split_cv The split method
 #' @examples
-#' resample(cars.data, xgb, splitCV(folds = 5))
+#' cars.data <- Dataset(data = cars, target = "dist")
+#' xgb <- InducerConstructer(configuration = list(nrounds = 10, verbose = 0), method = "XGBoost")
+#' cars.split <- splt$cv(folds = 5)(cars.data)
+#' resample(cars.data, xgb, cars.split)
 #' @export
 #' 
 resample <- function(data, inducer, split_cv) {
@@ -168,16 +176,16 @@ resample <- function(data, inducer, split_cv) {
   results <- list()
   
   for (split in names(split_cv)) {
-    train_data <- split_cv[[split]]$train
-    validation_data <- split_cv[[split]]$validation
+    train_data <- data[split_cv[[split]]$train, ]
+    validation_data <- data[split_cv[[split]]$validation, ]
     
     # Apply inducer to the training data
-    model <- inducer(train_data)
+    model <- fit(inducer, train_data)
     
     # Evaluate the model on the validation data
     # You need to replace this part with your evaluation code
     # For example, you might use predict() and some performance metric
-    validation_predictions <- predict(model, validation_data)
+    validation_predictions <- predict(model, newdata = validation_data)
     
     # Store the results
     results[[split]] <- list(
