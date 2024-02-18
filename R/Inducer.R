@@ -5,7 +5,7 @@
 #' @export
 InducerConstructer <- function(configuration, method) {
   # TO DO: Check validity of hyperparameters!
-  assertList(configuration, names = "named")
+  assertList(configuration, names = "named", null.ok = TRUE)
   assertCharacter(method, len=1)
   hyperparameters <- names(configuration)
   Inducer <- structure(
