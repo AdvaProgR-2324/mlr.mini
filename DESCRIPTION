@@ -9,7 +9,7 @@ Authors@R: c(
     person(given = "Anna", family = "N.", role = "aut", email = "anna.nazarova@campus.lmu.de")
   )
 Description: Provides a mini package for machine learning in R.
-License: MIT
+License: MIT + file LICENSE
 URL: https://github.com/AdvaProgR-2324/mlr.mini
 BugReports: https://github.com/AdvaProgR-2324/mlr.mini/issues
 ByteCompile: true
@@ -18,7 +18,18 @@ Config/testthat/edition: 3
 Config/testthat/parallel: true
 Roxygen: list(markdown = TRUE)
 Imports:
-  checkmate
+  checkmate,
+  Matrix,
+  stringr,
+  xgboost
 Suggests:
   testthat
 RoxygenNote: 7.3.0
+Collate: 
+    'Dataset.R'
+    'constructFormula.R'
+    'InducerXgboost.R'
+    'Inducer.R'
+    'Models.R'
+    'Resampling.R'
+    'zzz.R'
