@@ -36,7 +36,7 @@ EvaluatorMAE.data.frame <- function(.prediction) {
 #' xgb <- InducerConstructer(configuration = list(nrounds = 10, verbose = 0), method = "XGBoost")
 #' cv5 <- splt$cv(folds = 5)
 #' rp <- resample(cars.data, xgb, cv5)
-#' #EvaluatorMAE(rp)
+#' EvaluatorMAE(rp)
 #' @export
 EvaluatorMAE.ResamplePrediction <- function(.prediction) {
   res <- numeric(length(.prediction))

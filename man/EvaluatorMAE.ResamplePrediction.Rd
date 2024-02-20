@@ -17,5 +17,5 @@ cars.data <- Dataset(data = cars, target = "dist")
 xgb <- InducerConstructer(configuration = list(nrounds = 10, verbose = 0), method = "XGBoost")
 cv5 <- splt$cv(folds = 5)
 rp <- resample(cars.data, xgb, cv5)
-#EvaluatorMAE(rp)
+EvaluatorMAE(rp)
 }
