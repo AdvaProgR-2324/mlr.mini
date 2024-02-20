@@ -85,6 +85,9 @@
     <loc>/reference/configuration.Model.html</loc>
   </url>
   <url>
+    <loc>/reference/configuration.Split.html</loc>
+  </url>
+  <url>
     <loc>/reference/configuration.html</loc>
   </url>
   <url>
@@ -193,6 +196,9 @@
     <loc>/reference/print.Model.html</loc>
   </url>
   <url>
+    <loc>/reference/print.ResamplePrediction.html</loc>
+  </url>
+  <url>
     <loc>/reference/print.SplitInstance.html</loc>
   </url>
   <url>
@@ -203,6 +209,9 @@
   </url>
   <url>
     <loc>/reference/set_class_SplitCV.html</loc>
+  </url>
+  <url>
+    <loc>/reference/splitInstantiate.html</loc>
   </url>
   <url>
     <loc>/reference/splt.html</loc>
