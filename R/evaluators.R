@@ -52,7 +52,13 @@ EvaluatorMAE.ResamplePrediction <- function(.prediction) {
   return(result_obj)
 }
 
-
+#' @title 'print' method for `EvaluatorMAE`
+#' 
+#' @description This method prints the evaluator name and configuration
+#' 
+#' @param x An object of class `EvaluatorMAE`
+#' @param ... Additional arguments
+#' @export
 print.EvaluatorMAE <- function(x, ...) {
   cat("Evaluator: Mean Absolute Error\n")
   cat("Configuration: ()\n")
@@ -105,6 +111,12 @@ EvaluatorRMSE.ResamplePrediction <- function(.prediction) {
   return(result_obj)
 }
 
+#' @title 'print' method for `EvaluatorRMSE`
+#' 
+#' @description This method prints the evaluator name and configuration
+#' @param x An object of class `EvaluatorRMSE`
+#' @param ... Additional arguments
+#' @export
 print.EvaluatorRMSE <- function(x, ...) {
   cat("Evaluator: Root Mean Squared Error\n")
   cat("Configuration: ()\n")
@@ -159,6 +171,12 @@ EvaluatorAccuracy.ResamplePrediction <- function(.prediction) {
   return(result_obj)
 }
 
+#' @title 'print' method for `EvaluatorAccuracy`
+#' 
+#' @description This method prints the evaluator name and configuration
+#' @param x An object of class `EvaluatorAccuracy`
+#' @param ... Additional arguments
+#' @export
 print.EvaluatorAccuracy <- function(x, ...) {
   cat("Evaluator: Accuracy\n")
   cat("Configuration: ()\n")
@@ -215,18 +233,24 @@ EvaluatorAUC.ResamplePrediction <- function(.prediction) {
   return(result_obj)
 }
 
+#' @title 'print' method for `EvaluatorAUC`
+#' 
+#' @description This method prints the evaluator name and configuration
+#' @param x An object of class `EvaluatorAUC`
+#' @param ... Additional arguments
+#' @export
 print.EvaluatorAUC <- function(x, ...) {
   cat("Evaluator: Area Under the ROC Curve\n")
   cat("Configuration: ()\n")
   cat("Value:", x$value, "\n")
 }
 
-evl <- new.env()
-class(EvaluatorMAE) <- "EvaluatorMAE"
-evl$mae <- EvaluatorMAE
-evl$rmse <- EvaluatorRMSE
-evl$accuracy <- EvaluatorAccuracy
-evl$auc <- EvaluatorAUC
+evl <- list2env(
+  mae = EvaluatorMAE,
+  rmse = EvaluatorRMSE,
+  accuracy = EvaluatorAccuracy,
+  auc = EvaluatorAUC
+)
 
 # Generic evaluate function
 evaluate <- function(evaluator, .prediction, .dataset = NULL, .model = NULL, ...) {
