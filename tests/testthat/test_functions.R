@@ -68,5 +68,4 @@ test_that("Test Dataset", {
   
   expect_equal(metainfo(Dataset(data = data.frame(a = c(1, NA, 3), b = c(NA, 2, 3)), target = "a"))$missings, TRUE)
   expect_equal(metainfo(cars.data[, "dist"])$features, NULL)
-  
 })
