@@ -36,7 +36,7 @@ EvaluatorMAE.data.frame <- function(.prediction) {
 #' xgb <- InducerConstructer(configuration = list(nrounds = 10, verbose = 0), method = "XGBoost")
 #' cv5 <- splt$cv(folds = 5)
 #' rp <- resample(cars.data, xgb, cv5)
-#' EvaluatorMAE(rp)
+#' #EvaluatorMAE(rp)
 EvaluatorMAE.ResamplePrediction <- function(.prediction) {
   res <- numeric(length(.prediction))
   for (split in names(.prediction)) {
@@ -224,6 +224,9 @@ class(EvaluatorRMSE) <- "EvaluatorRMSE"
 class(EvaluatorAccuracy) <- "EvaluatorAccuracy"
 class(EvaluatorAUC) <- "EvaluatorAUC"
 
+#' Evaluators Environment
+#' @export
+
 # First, create a list of your evaluator functions
 evaluators_list <- list(
   mae = EvaluatorMAE,
@@ -236,7 +239,21 @@ evaluators_list <- list(
 evl <- list2env(evaluators_list)
 
 
-# Generic evaluate function
+#' Generic Evaluation Function
+#' @param evaluator The evaluator function to be used for performance evaluation,
+#' chosen from the `evl` environment (e.g., \code{evl$mae}, \code{evl$rmse}).
+#' @param .prediction The prediction object to be evaluated.
+#' @param .dataset Optional; a dataset object required by some evaluators.
+#' @param .model Optional; a model object that might be required for some evaluations.
+#' @param ... Additional arguments
+#' @return Evaluation result, which varies depending on the evaluator used.
+#' @examples
+#' \dontrun{
+#'   prediction <- data.frame(prediction = c(1, 2, 3), truth = c(1, 2, 4))
+#'   result <- evaluate(evl$mae, prediction)
+#'   print(result)
+#' }
+#' @export
 evaluate <- function(evaluator, .prediction, .dataset = NULL, .model = NULL, ...) {
   evaluator(.prediction, .dataset, .model, ...)
 }
