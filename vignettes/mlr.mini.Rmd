@@ -73,6 +73,7 @@ The `Split` object can then be used to split the data into folds and returns an 
 ```{r}
 cv5 <- splt$cv(folds = 5)
 cars.split <- cv5(cars.data)
+cars.split
 ```
 
 The `resample` function creates a `ResamplePrediction` object. The `ResamplePrediction` object contains the predictions made, the relevant ground truth values, and the training tasks and trained model for each fold. The `resample` function takes a `Dataset` object, an `Inducer` object, and a `SplitInstance` or `Split` object as input. An Evaluator can then be applied to a `ResamplePrediction` object to evaluate the performance of the model.

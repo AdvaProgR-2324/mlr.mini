@@ -37,7 +37,9 @@ predict(model.xgb, newdata = data.frame(speed = 10))
 ### Evaluate the model
 
 ``` r
+cv5 <- splt$cv(folds = 5)
 cars.split <- cv5(cars.data)
 rp <- resample(cars.data, xgb, cars.split)
+mae <- evl$mae
 mae(rp)
 ```
