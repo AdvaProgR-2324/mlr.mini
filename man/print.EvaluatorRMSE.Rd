@@ -4,7 +4,7 @@
 \alias{print.EvaluatorRMSE}
 \title{'print' method for \code{EvaluatorRMSE}}
 \usage{
-print.EvaluatorRMSE(x, ...)
+\method{print}{EvaluatorRMSE}(x, ...)
 }
 \arguments{
 \item{x}{An object of class \code{EvaluatorRMSE}}

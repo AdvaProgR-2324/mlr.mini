@@ -4,7 +4,7 @@
 \alias{print.ResamplePrediction}
 \title{'print' method for ResamplePrediction objects}
 \usage{
-print.ResamplePrediction(x, ...)
+\method{print}{ResamplePrediction}(x, ...)
 }
 \arguments{
 \item{x}{A ResamplePrediction object}

@@ -4,7 +4,7 @@
 \alias{print.hp}
 \title{'print' methode for \code{hp} class}
 \usage{
-print.hp(x, ...)
+\method{print}{hp}(x, ...)
 }
 \arguments{
 \item{x}{An hp object}

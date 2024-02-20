@@ -4,7 +4,7 @@
 \alias{print.Inducer}
 \title{print method for \code{Inducer} class.}
 \usage{
-print.Inducer(x, ...)
+\method{print}{Inducer}(x, ...)
 }
 \arguments{
 \item{x}{S3 object of class \code{Inducer}.}

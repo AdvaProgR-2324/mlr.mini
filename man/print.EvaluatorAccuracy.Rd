@@ -4,7 +4,7 @@
 \alias{print.EvaluatorAccuracy}
 \title{'print' method for \code{EvaluatorAccuracy}}
 \usage{
-print.EvaluatorAccuracy(x, ...)
+\method{print}{EvaluatorAccuracy}(x, ...)
 }
 \arguments{
 \item{x}{An object of class \code{EvaluatorAccuracy}}
