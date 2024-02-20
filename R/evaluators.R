@@ -23,10 +23,7 @@ EvaluatorMAE <- function(.prediction) {
 EvaluatorMAE.data.frame <- function(.prediction) {
   assertNames(names(.prediction), subset.of = c("prediction", "truth"))
   result <- mean(abs(.prediction$prediction - .prediction$truth))
-  # Create a result object with a class
-  result_obj <- list(value = result)
-  class(result_obj) <- "EvaluatorMAE"
-  return(result_obj)
+  result
 }
 
 #' @title Mean Absolute Error method for ResamplePrediction
@@ -39,7 +36,7 @@ EvaluatorMAE.data.frame <- function(.prediction) {
 #' xgb <- InducerConstructer(configuration = list(nrounds = 10, verbose = 0), method = "XGBoost")
 #' cv5 <- splt$cv(folds = 5)
 #' rp <- resample(cars.data, xgb, cv5)
-#' EvaluatorMAE(rp)
+#' #EvaluatorMAE(rp)
 EvaluatorMAE.ResamplePrediction <- function(.prediction) {
   res <- numeric(length(.prediction))
   for (split in names(.prediction)) {
@@ -48,18 +45,19 @@ EvaluatorMAE.ResamplePrediction <- function(.prediction) {
     res[split] <- mean(abs(pre$prediction - pre$truth))
   }
   result <- mean(res)  # Assuming res is calculated as shown
-  
-  # Create a result object with a class
-  result_obj <- list(value = result)
-  class(result_obj) <- "EvaluatorMAE"
-  return(result_obj)
+  return(result)
 }
 
-
+#' @title 'print' method for `EvaluatorMAE`
+#' 
+#' @description This method prints the evaluator name and configuration
+#' 
+#' @param x An object of class `EvaluatorMAE`
+#' @param ... Additional arguments
+#' @export
 print.EvaluatorMAE <- function(x, ...) {
   cat("Evaluator: Mean Absolute Error\n")
   cat("Configuration: ()\n")
-  cat("Value:", x$value, "\n")
 }
 
 #' @title Root Mean Squared Error generic function
@@ -81,11 +79,7 @@ EvaluatorRMSE <- function(.prediction) {
 EvaluatorRMSE.data.frame <- function(.prediction) {
   assertNames(names(.prediction), subset.of = c("prediction", "truth"))
   result <- sqrt(mean((.prediction$prediction - .prediction$truth)^2))
-  
-  # Create a result object with a class
-  result_obj <- list(value = result)
-  class(result_obj) <- "EvaluatorRMSE"
-  return(result_obj)
+  return(result)
 }
 
 #' @title RMSE method for ResamplePrediction
@@ -102,17 +96,18 @@ EvaluatorRMSE.ResamplePrediction <- function(.prediction) {
     res[split] <- sqrt(mean((pre$prediction - pre$truth)^2))
   }
   result <- mean(res)  # Assuming res is calculated as shown
-  
-  # Create a result object with a class
-  result_obj <- list(value = result)
-  class(result_obj) <- "EvaluatorRMSE"
-  return(result_obj)
+  return(result)
 }
 
+#' @title 'print' method for `EvaluatorRMSE`
+#' 
+#' @description This method prints the evaluator name and configuration
+#' @param x An object of class `EvaluatorRMSE`
+#' @param ... Additional arguments
+#' @export
 print.EvaluatorRMSE <- function(x, ...) {
   cat("Evaluator: Root Mean Squared Error\n")
   cat("Configuration: ()\n")
-  cat("Value:", x$value, "\n")
 }
 
 
@@ -156,17 +151,18 @@ EvaluatorAccuracy.ResamplePrediction <- function(.prediction) {
     res[split] <- mean(pre$prediction == pre$truth)
   }
   result <- mean(res)  # Assuming res is calculated as shown
-  
-  # Create a result object with a class
-  result_obj <- list(value = result)
-  class(result_obj) <- "EvaluatorAccuracy"
-  return(result_obj)
+  return(result)
 }
 
+#' @title 'print' method for `EvaluatorAccuracy`
+#' 
+#' @description This method prints the evaluator name and configuration
+#' @param x An object of class `EvaluatorAccuracy`
+#' @param ... Additional arguments
+#' @export
 print.EvaluatorAccuracy <- function(x, ...) {
   cat("Evaluator: Accuracy\n")
   cat("Configuration: ()\n")
-  cat("Value:", x$value, "\n")
 }
 
 #' @title AUC generic function
@@ -189,11 +185,7 @@ EvaluatorAUC.data.frame <- function(.prediction) {
   requireNamespace("pROC", quietly = TRUE)
   roc_response <- pROC::roc(response = .prediction$truth, predictor = .prediction$prediction)
   result <- pROC::auc(roc_response)
-  
-  # Create a result object with a class
-  result_obj <- list(value = result)
-  class(result_obj) <- "EvaluatorAUC"
-  return(result_obj)
+  return(result)
 }
 
 #' @title AUC method for ResamplePrediction
@@ -212,26 +204,56 @@ EvaluatorAUC.ResamplePrediction <- function(.prediction) {
     res[split] <- pROC::auc(roc_response)
   }
   result <- mean(res)  # Assuming res is calculated as shown
-  
-  # Create a result object with a class
-  result_obj <- list(value = result)
-  class(result_obj) <- "EvaluatorAUC"
-  return(result_obj)
+  return(result)
 }
 
+#' @title 'print' method for `EvaluatorAUC`
+#' 
+#' @description This method prints the evaluator name and configuration
+#' @param x An object of class `EvaluatorAUC`
+#' @param ... Additional arguments
+#' @export
 print.EvaluatorAUC <- function(x, ...) {
   cat("Evaluator: Area Under the ROC Curve\n")
   cat("Configuration: ()\n")
-  cat("Value:", x$value, "\n")
 }
 
-evl <- new.env()
-evl$mae <- EvaluatorMAE
-evl$rmse <- EvaluatorRMSE
-evl$accuracy <- EvaluatorAccuracy
-evl$auc <- EvaluatorAUC
 
-# Generic evaluate function
+class(EvaluatorMAE) <- "EvaluatorMAE"
+class(EvaluatorRMSE) <- "EvaluatorRMSE"
+class(EvaluatorAccuracy) <- "EvaluatorAccuracy"
+class(EvaluatorAUC) <- "EvaluatorAUC"
+
+#' Evaluators Environment
+#' @export
+
+# First, create a list of your evaluator functions
+evaluators_list <- list(
+  mae = EvaluatorMAE,
+  rmse = EvaluatorRMSE,
+  accuracy = EvaluatorAccuracy,
+  auc = EvaluatorAUC
+)
+
+# Now, convert this list to an environment
+evl <- list2env(evaluators_list)
+
+
+#' Generic Evaluation Function
+#' @param evaluator The evaluator function to be used for performance evaluation,
+#' chosen from the `evl` environment (e.g., \code{evl$mae}, \code{evl$rmse}).
+#' @param .prediction The prediction object to be evaluated.
+#' @param .dataset Optional; a dataset object required by some evaluators.
+#' @param .model Optional; a model object that might be required for some evaluations.
+#' @param ... Additional arguments
+#' @return Evaluation result, which varies depending on the evaluator used.
+#' @examples
+#' \dontrun{
+#'   prediction <- data.frame(prediction = c(1, 2, 3), truth = c(1, 2, 4))
+#'   result <- evaluate(evl$mae, prediction)
+#'   print(result)
+#' }
+#' @export
 evaluate <- function(evaluator, .prediction, .dataset = NULL, .model = NULL, ...) {
   evaluator(.prediction, .dataset, .model, ...)
 }
