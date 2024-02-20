@@ -11,12 +11,12 @@ resample(data, inducer, split_cv)
 
 \item{inducer}{An Inducer Object}
 
-\item{split_cv}{The split method}
+\item{split_cv}{The split method or a SplitInstance object}
 }
 \description{
 method that creates a ResamplePrediction. It contain the relevant
 result information of a resampling: the predictions made, the relevant ground
-truth values, and possibly the training tasks and trained model for each fold
+truth values, and the training tasks and trained model for each fold
 }
 \examples{
 cars.data <- Dataset(data = cars, target = "dist")

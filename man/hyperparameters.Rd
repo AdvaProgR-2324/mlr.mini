@@ -2,7 +2,7 @@
 % Please edit documentation in R/Resampling.R
 \name{hyperparameters}
 \alias{hyperparameters}
-\title{'hypaerparameters' generic function}
+\title{'hyperparameters' generic function}
 \usage{
 hyperparameters(x)
 }

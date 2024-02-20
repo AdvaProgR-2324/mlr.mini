@@ -2,7 +2,7 @@
 % Please edit documentation in R/Resampling.R
 \name{hyperparameters.SplitConstructorCV}
 \alias{hyperparameters.SplitConstructorCV}
-\title{'hypermarameters' method for SplitCV objects}
+\title{'hyperparameters' method for SplitCV objects}
 \usage{
 \method{hyperparameters}{SplitConstructorCV}(x)
 }

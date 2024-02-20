@@ -12,10 +12,10 @@ SplitCV(folds, repeats = 1)
 \item{repeats}{A numeric value: the number of repetition}
 }
 \description{
-Split the data into 2 parts: the training and validation part
+Create a function that splits the data into 2 parts: the training and validation part
 }
 \examples{
+cv3 <- SplitCV(folds = 3, repeats = 2)
 cars.data <- Dataset(data = cars, target = "dist")
-cars.data[c(1, 2, 3, 4), ]
-cars.data[c(1, 2), "dist"]
+cars.split <- cv3(cars.data)
 }

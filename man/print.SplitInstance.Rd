@@ -2,17 +2,17 @@
 % Please edit documentation in R/Resampling.R
 \name{print.SplitInstance}
 \alias{print.SplitInstance}
-\title{'print' method for SplitCV objects}
+\title{'print' method for SplitInstance objects}
 \usage{
 print.SplitInstance(x, ...)
 }
 \arguments{
-\item{x}{A SplitInstance objec}
+\item{x}{A SplitInstance object}
 
 \item{...}{Additional arguments}
 }
 \description{
-Print a SplitCV object
+Print a SplitInstance object
 }
 \examples{
 cars.data <- Dataset(data = cars, target = "dist")

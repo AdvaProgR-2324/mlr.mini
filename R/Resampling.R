@@ -8,13 +8,12 @@ source("R/Models.R")
 #' 
 #' @description
 #' Split the data into a training and a validation set
-
+#' 
 #' @param data A Dataset object containing the data
 #' @examples
 #' cars.data <- Dataset(data = cars, target = "dist")
-#' class(cars.data)
+#' str(Split(cars.data))
 #' @export
-#' 
 Split <- function(data){
   # Assertion
   assertClass(data, "Dataset")
@@ -35,16 +34,16 @@ Split <- function(data){
 
 #' @title SplitCV method for splitting the data
 #' 
-#' @description Split the data into 2 parts: the training and validation part
+#' @description Create a function that splits the data into 2 parts: the training and validation part
 #' 
 #' @param folds A numeric value: give the number of folds
 #' @param repeats A numeric value: the number of repetition
 #' @examples
+#' cv3 <- SplitCV(folds = 3, repeats = 2)
 #' cars.data <- Dataset(data = cars, target = "dist")
-#' cars.data[c(1, 2, 3, 4), ]
-#' cars.data[c(1, 2), "dist"]
+#' cars.split <- cv3(cars.data)
 #' @export
-SplitCV <- function(folds, repeats = 1){
+SplitCV <- function(folds, repeats = 1) {
   # Input checks
   assertNumeric(folds)
   assertNumeric(repeats)
@@ -99,11 +98,11 @@ splt <- new.env()
 splt$cv <- SplitCV
 
 
-#' @title 'print' method for SplitCV objects
+#' @title 'print' method for SplitInstance objects
 #' 
-#' @description Print a SplitCV object
+#' @description Print a SplitInstance object
 #' 
-#' @param x A SplitInstance objec
+#' @param x A SplitInstance object
 #' @param ... Additional arguments
 #' @examples
 #' cars.data <- Dataset(data = cars, target = "dist")
@@ -111,7 +110,6 @@ splt$cv <- SplitCV
 #' cars.split <- cv5(cars.data)
 #' print(cars.split)
 #' @export
-#' 
 print.SplitInstance <- function(x, ...){
   
   # number of rows in the dataset
@@ -125,13 +123,44 @@ print.SplitInstance <- function(x, ...){
   # Split the string by dot and extract he name
   name <- strsplit(name, "\\.")[[1]][1]
 
-  cat("CV Split Instance of the \"", name, ", dataset (", rows, " rows)\n", sep = "")
+  cat("CV Split Instance of the \"", name, "\" dataset (", rows, " rows)\n", sep = "")
   cat("Configuration: folds = ", folds, ", repeats = ", repeats, "\n", sep = "")
   invisible(x)
 }
 
+#' @title splitInstantiate
+#' 
+#' @description Split the data into a training and a validation set
+#' 
+#' @param split A Split object
+#' @param data A Dataset object containing the data
+#' @examples
+#' cars.data <- Dataset(data = cars, target = "dist")
+#' cv5 <- splt$cv(folds = 5)
+#' cars.split <- splitInstantiate(cv5, cars.data)
+#' @export
+splitInstantiate <- function(split, data){
+  assertClass(split, "Split")
+  assertClass(data, "Dataset")
+  
+  split(data)
+}
 
-##' @title 'hypaerparameters' generic function
+#' @title 'configuration' method for `Split` objects
+#' 
+#' @description Get the configuration of a Split object
+#' 
+#' @param x A Split object
+#' @examples
+#' cv5 <- splt$cv(folds = 5)
+#' configuration(cv5)
+#' @export
+configuration.Split <- function(x) {
+  list(folds = environment(x)$folds, repeats = environment(x)$repeats)
+}
+
+
+#' @title 'hyperparameters' generic function
 #' 
 #' @description Get information about the hyperparameters of an object
 #' 
@@ -143,7 +172,7 @@ hyperparameters <- function(x){
   UseMethod("hyperparameters")
 }
 
-#' @title 'hypermarameters' method for SplitCV objects
+#' @title 'hyperparameters' method for SplitCV objects
 #' 
 #' @description Get the hyperparameters information of a Split object
 #' 
@@ -163,21 +192,25 @@ hyperparameters.SplitConstructorCV <- function(x){
 #' 
 #' @description method that creates a ResamplePrediction. It contain the relevant 
 #' result information of a resampling: the predictions made, the relevant ground 
-#' truth values, and possibly the training tasks and trained model for each fold
+#' truth values, and the training tasks and trained model for each fold
 #' 
 #' @param data A Dataset object
 #' @param inducer An Inducer Object
-#' @param split_cv The split method
+#' @param split_cv The split method or a SplitInstance object
 #' @examples
 #' cars.data <- Dataset(data = cars, target = "dist")
 #' xgb <- InducerConstructer(configuration = list(nrounds = 10, verbose = 0), method = "XGBoost")
 #' cars.split <- splt$cv(folds = 5)(cars.data)
 #' resample(cars.data, xgb, cars.split)
 #' @export
-#' 
 resample <- function(data, inducer, split_cv) {
   assertClass(data, "Dataset")
   assertClass(inducer, "Inducer")
+  assertMultiClass(split_cv, c("SplitInstance", "Split"))
+  
+  if ("Split" %in% class(split_cv)) {
+    split_cv <- split_cv(data)
+  }
   
   results <- list()
   
@@ -199,6 +232,30 @@ resample <- function(data, inducer, split_cv) {
       predictions = validation_predictions
     )
   }
+  structure(results, class = "ResamplePrediction")
+}
+
+#' @title 'print' method for ResamplePrediction objects
+#' 
+#' @description Print a ResamplePrediction object
+#' 
+#' @param x A ResamplePrediction object
+#' @param ... Additional arguments
+#' @examples
+#' cars.data <- Dataset(data = cars, target = "dist")
+#' xgb <- InducerConstructer(configuration = list(nrounds = 10, verbose = 0), method = "XGBoost")
+#' cars.split <- splt$cv(folds = 5)(cars.data)
+#' rp <- resample(cars.data, xgb, cars.split)
+#' print(rp)
+#' @export
+print.ResamplePrediction <- function(x, ...){
+  repeat_indices <- unique(gsub(".*repeat_(\\d+)fold\\d+", "\\1", names(x)))
+  n_repeats <- length(repeat_indices)
+  n_folds <- length(x) / n_repeats
   
-  results
+  cat("ResamplePrediction Object:\n")
+  cat("- Number of Repeats: ", n_repeats, "\n", sep = "")
+  cat("- Number of Folds: ", n_folds, "\n", sep = "")
+  cat("- ", x[[1]]$model$task," Model: \"", x[[1]]$model$inducer$method, "\" fitted on \"", x[[1]]$model$data$name, "\" dataset\n", sep = "")
+  invisible(x)
 }
