@@ -82,8 +82,9 @@ p_num <- function(lower, upper) {
 #' p_int(1, Inf)
 #' @export
 p_int <- function(lower, upper) {
-  # assert_integerish(lower, finite = FALSE)
-  # assert_integerish(upper, finite = FALSE)
+  assert_true(upper > lower)
+  assert_true(isTRUE(check_integerish(lower)) | lower == Inf)
+  assert_true(isTRUE(check_integerish(upper)) | upper == Inf)
   
   list(type = "int", range = c(lower, upper))
 }
