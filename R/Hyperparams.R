@@ -7,22 +7,36 @@
 #' @export
 hp <- function(...) {
   name <- names(list(...))
-  type <- lapply(list(...), function(x) x[[1]])
-  range <- lapply(list(...), function(x) x[[2]])
+  type <- sapply(list(...), function(x) x[[1]])
+  range <- sapply(list(...), function(x) x[[2]])
   
-  data <- data.frame(name = name, type = unlist(type), range = I(range), stringsAsFactors = FALSE)
   
   structure(list(
-    data = data
+    name = name,
+    type = type,
+    range = range
   ), class = "hp")
 }
 
+#' @title 'print' methode for `hp` class
+#' @description Print an hp object
+#' @param x An hp object
+#' @param ... Additional arguments
+#' @examples
+#' hpx <- hp(x = p_num(0, 1), y = p_int(1, Inf), z = p_fct(letters))
+#' print(hpx)
+#' @export
+print.hp <- function(x, ...) {
+  print(data.frame(name = x$name, type = unlist(x$type), range = I(x$range), stringsAsFactors = FALSE))
+  invisible(x)
+}
 
 #' @title Hyperparameter check
 #' @description Check if an element is in the hyperparameter space
 #' @param check A list of hyperparameters
 #' @param hp A hyperparameter space
 #' @examples
+#' hpx <- hp(x = p_num(0, 1), y = p_int(1, Inf), z = p_fct(letters))
 #' hpCheck(list(x = 1, y = 1, z = "a"), hpx)
 #' @export
 
@@ -33,11 +47,11 @@ hpCheck <- function(check, hp) {
   ret <- TRUE
 
   for (i in names(check)) {
-    type <- hp$data$type[i == hp$data$name]
+    type <- hp$type[i == hp$name]
     temp <- switch(type,
-           num = check_numeric(check[[i]], lower = hp$data$range[[i]][1], upper = hp$data$range[[i]][2]),
-           int = check_integerish(check[[i]], lower = hp$data$range[[i]][1], upper = hp$data$range[[i]][2]),
-           fct = check_choice(check[[i]], choices = unlist(hp$data$range[[i]])))
+           num = check_numeric(check[[i]], lower = hp$range[[i]][1], upper = hp$range[[i]][2]),
+           int = check_integerish(check[[i]], lower = hp$range[[i]][1], upper = hp$range[[i]][2]),
+           fct = check_choice(check[[i]], choices = unlist(hp$range[[i]])))
     if (temp != TRUE) {
       return(temp) # to return all errors replace with print()
       ret <- FALSE
@@ -45,14 +59,6 @@ hpCheck <- function(check, hp) {
   }
   if (ret) return(ret)
 }
-
-
-
-
-
-
-
-
 
 #' @title Numeric Range
 #' @description Define ranges for numeric hyperparameters
