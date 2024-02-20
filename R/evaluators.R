@@ -45,11 +45,7 @@ EvaluatorMAE.ResamplePrediction <- function(.prediction) {
     res[split] <- mean(abs(pre$prediction - pre$truth))
   }
   result <- mean(res)  # Assuming res is calculated as shown
-  
-  # Create a result object with a class
-  result_obj <- list(value = result)
-  class(result_obj) <- "EvaluatorMAE"
-  return(result_obj)
+  return(result)
 }
 
 #' @title 'print' method for `EvaluatorMAE`
@@ -83,11 +79,7 @@ EvaluatorRMSE <- function(.prediction) {
 EvaluatorRMSE.data.frame <- function(.prediction) {
   assertNames(names(.prediction), subset.of = c("prediction", "truth"))
   result <- sqrt(mean((.prediction$prediction - .prediction$truth)^2))
-  
-  # Create a result object with a class
-  result_obj <- list(value = result)
-  class(result_obj) <- "EvaluatorRMSE"
-  return(result_obj)
+  return(result)
 }
 
 #' @title RMSE method for ResamplePrediction
@@ -104,11 +96,7 @@ EvaluatorRMSE.ResamplePrediction <- function(.prediction) {
     res[split] <- sqrt(mean((pre$prediction - pre$truth)^2))
   }
   result <- mean(res)  # Assuming res is calculated as shown
-  
-  # Create a result object with a class
-  result_obj <- list(value = result)
-  class(result_obj) <- "EvaluatorRMSE"
-  return(result_obj)
+  return(result)
 }
 
 #' @title 'print' method for `EvaluatorRMSE`
@@ -120,7 +108,6 @@ EvaluatorRMSE.ResamplePrediction <- function(.prediction) {
 print.EvaluatorRMSE <- function(x, ...) {
   cat("Evaluator: Root Mean Squared Error\n")
   cat("Configuration: ()\n")
-  cat("Value:", x$value, "\n")
 }
 
 
@@ -164,11 +151,7 @@ EvaluatorAccuracy.ResamplePrediction <- function(.prediction) {
     res[split] <- mean(pre$prediction == pre$truth)
   }
   result <- mean(res)  # Assuming res is calculated as shown
-  
-  # Create a result object with a class
-  result_obj <- list(value = result)
-  class(result_obj) <- "EvaluatorAccuracy"
-  return(result_obj)
+  return(result)
 }
 
 #' @title 'print' method for `EvaluatorAccuracy`
@@ -180,7 +163,6 @@ EvaluatorAccuracy.ResamplePrediction <- function(.prediction) {
 print.EvaluatorAccuracy <- function(x, ...) {
   cat("Evaluator: Accuracy\n")
   cat("Configuration: ()\n")
-  cat("Value:", x$value, "\n")
 }
 
 #' @title AUC generic function
@@ -203,11 +185,7 @@ EvaluatorAUC.data.frame <- function(.prediction) {
   requireNamespace("pROC", quietly = TRUE)
   roc_response <- pROC::roc(response = .prediction$truth, predictor = .prediction$prediction)
   result <- pROC::auc(roc_response)
-  
-  # Create a result object with a class
-  result_obj <- list(value = result)
-  class(result_obj) <- "EvaluatorAUC"
-  return(result_obj)
+  return(result)
 }
 
 #' @title AUC method for ResamplePrediction
@@ -226,11 +204,7 @@ EvaluatorAUC.ResamplePrediction <- function(.prediction) {
     res[split] <- pROC::auc(roc_response)
   }
   result <- mean(res)  # Assuming res is calculated as shown
-  
-  # Create a result object with a class
-  result_obj <- list(value = result)
-  class(result_obj) <- "EvaluatorAUC"
-  return(result_obj)
+  return(result)
 }
 
 #' @title 'print' method for `EvaluatorAUC`
@@ -242,15 +216,20 @@ EvaluatorAUC.ResamplePrediction <- function(.prediction) {
 print.EvaluatorAUC <- function(x, ...) {
   cat("Evaluator: Area Under the ROC Curve\n")
   cat("Configuration: ()\n")
-  cat("Value:", x$value, "\n")
 }
 
+<<<<<<< HEAD
 evl <- list2env(
   mae = EvaluatorMAE,
   rmse = EvaluatorRMSE,
   accuracy = EvaluatorAccuracy,
   auc = EvaluatorAUC
 )
+
+class(EvaluatorMAE) <- "EvaluatorMAE"
+class(EvaluatorRMSE) <- "EvaluatorRMSE"
+class(EvaluatorAccuracy) <- "EvaluatorAccuracy"
+class(EvaluatorAUC) <- "EvaluatorAUC"
 
 # Generic evaluate function
 evaluate <- function(evaluator, .prediction, .dataset = NULL, .model = NULL, ...) {
