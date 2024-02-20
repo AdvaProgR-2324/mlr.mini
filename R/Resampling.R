@@ -128,6 +128,37 @@ print.SplitInstance <- function(x, ...){
   invisible(x)
 }
 
+#' @title splitInstantiate
+#' 
+#' @description Split the data into a training and a validation set
+#' 
+#' @param split A Split object
+#' @param data A Dataset object containing the data
+#' @examples
+#' cars.data <- Dataset(data = cars, target = "dist")
+#' cv5 <- splt$cv(folds = 5)
+#' cars.split <- splitInstantiate(cv5, cars.data)
+#' @export
+splitInstantiate <- function(split, data){
+  assertClass(split, "Split")
+  assertClass(data, "Dataset")
+  
+  split(data)
+}
+
+#' @title 'configuration' method for `Split` objects
+#' 
+#' @description Get the configuration of a Split object
+#' 
+#' @param x A Split object
+#' @examples
+#' cv5 <- splt$cv(folds = 5)
+#' configuration(cv5)
+#' @export
+configuration.Split <- function(x) {
+  list(folds = environment(x)$folds, repeats = environment(x)$repeats)
+}
+
 
 #' @title 'hyperparameters' generic function
 #' 
@@ -202,4 +233,29 @@ resample <- function(data, inducer, split_cv) {
     )
   }
   structure(results, class = "ResamplePrediction")
+}
+
+#' @title 'print' method for ResamplePrediction objects
+#' 
+#' @description Print a ResamplePrediction object
+#' 
+#' @param x A ResamplePrediction object
+#' @param ... Additional arguments
+#' @examples
+#' cars.data <- Dataset(data = cars, target = "dist")
+#' xgb <- InducerConstructer(configuration = list(nrounds = 10, verbose = 0), method = "XGBoost")
+#' cars.split <- splt$cv(folds = 5)(cars.data)
+#' rp <- resample(cars.data, xgb, cars.split)
+#' print(rp)
+#' @export
+print.ResamplePrediction <- function(x, ...){
+  repeat_indices <- unique(gsub(".*repeat_(\\d+)fold\\d+", "\\1", names(x)))
+  n_repeats <- length(repeat_indices)
+  n_folds <- length(x) / n_repeats
+  
+  cat("ResamplePrediction Object:\n")
+  cat("- Number of Repeats: ", n_repeats, "\n", sep = "")
+  cat("- Number of Folds: ", n_folds, "\n", sep = "")
+  cat("- ", x[[1]]$model$task," Model: \"", x[[1]]$model$inducer$method, "\" fitted on \"", x[[1]]$model$data$name, "\" dataset\n", sep = "")
+  invisible(x)
 }
