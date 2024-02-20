@@ -58,6 +58,15 @@
     <loc>/reference/InducerConstructer.html</loc>
   </url>
   <url>
+    <loc>/reference/InducerGlm.html</loc>
+  </url>
+  <url>
+    <loc>/reference/InducerRandomForest.html</loc>
+  </url>
+  <url>
+    <loc>/reference/InducerXGBoost.html</loc>
+  </url>
+  <url>
     <loc>/reference/Split.html</loc>
   </url>
   <url>
@@ -95,6 +104,12 @@
   </url>
   <url>
     <loc>/reference/fit.html</loc>
+  </url>
+  <url>
+    <loc>/reference/fit2.InducerGlm.html</loc>
+  </url>
+  <url>
+    <loc>/reference/fit2.InducerRandomForest.html</loc>
   </url>
   <url>
     <loc>/reference/fit2.InducerXGBoost.html</loc>
