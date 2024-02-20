@@ -2,7 +2,7 @@
 % Please edit documentation in R/Dataset.R
 \name{as.data.frame.Dataset}
 \alias{as.data.frame.Dataset}
-\title{'as.data.frame' method for Dataset objects}
+\title{'as.data.frame' method for \code{Dataset} objects}
 \usage{
 \method{as.data.frame}{Dataset}(x, row.names = NULL, optional = FALSE, ..., columns = "all")
 }
@@ -21,6 +21,6 @@
 Convert a Dataset object to a data frame
 }
 \examples{
-cars.data <- Dataset(data = cars, target = "dist")
-head(as.data.frame(cars.data))
+cars.data <- Dataset(data = cars[c(1, 2, 3, 4), ], target = "dist")
+as.data.frame(cars.data)
 }
