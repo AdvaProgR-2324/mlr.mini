@@ -27,6 +27,7 @@ Suggests:
 RoxygenNote: 7.3.0
 Collate: 
     'Dataset.R'
+    'Hyperparams.R'
     'constructFormula.R'
     'InducerXgboost.R'
     'Inducer.R'
