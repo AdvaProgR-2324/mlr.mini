@@ -198,12 +198,3 @@ print.Model <- function(x, ...) {
   cat(sprintf('%s Model: "%s" fitted on "%s" dataset.', x$task, x$inducer$method,
               x$data$name))
 }
-
-
-# Test:
-# meep <- fit(InducerXgboost, cars.data, eta = 0.2, nrounds = 10, verbose = 0)
-# meep
-# meep$inducer
-# meep$data
-# meep$model
-# meep$model$feat
