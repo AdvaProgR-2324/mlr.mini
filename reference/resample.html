@@ -104,16 +104,16 @@ truth values, and possibly the training tasks and trained model for each fold</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> $data</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $data</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    dist speed</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5    16     8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23   80    14</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 38   68    19</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 32   42    18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7    18    10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9    34    10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 43   64    20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19   46    13</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 50   85    25</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29   32    17</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6    10     9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30   40    17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4    22     7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12   14    12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13   20    12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1     2     4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49  120    24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42   56    20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2    10     4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $target</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "dist"</span>
@@ -129,23 +129,23 @@ truth values, and possibly the training tasks and trained model for each fold</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $X</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    dist speed</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5    16     8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23   80    14</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 38   68    19</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 32   42    18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7    18    10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9    34    10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 43   64    20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19   46    13</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 50   85    25</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29   32    17</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6    10     9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30   40    17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4    22     7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12   14    12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13   20    12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1     2     4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49  120    24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42   56    20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2    10     4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $y</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 19 18 10 10 20 13 25 17  9 17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  8 14 19  7 12 12  4 24 20  4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $model</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> raw: 12.3 Kb </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> raw: 13.4 Kb </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> call:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   xgb.train(params = params, data = dtrain, nrounds = nrounds, </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     watchlist = watchlist, verbose = verbose, print_every_n = print_every_n, </span>
@@ -164,11 +164,11 @@ truth values, and possibly the training tasks and trained model for each fold</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      iter train_rmse</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;num&gt;      &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         1  37.437663</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         2  29.078779</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         1  42.551439</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         2  33.866319</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         9   7.893999</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        10   7.016990</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         9  10.368368</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        10   8.889586</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $task</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Regression"</span>
@@ -182,46 +182,46 @@ truth values, and possibly the training tasks and trained model for each fold</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $repeat_1_fold_1$predictions</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    prediction truth</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1     9.38910     2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2     9.38910    10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3     9.38910     4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4     9.38910    22</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5     9.38910    16</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8    24.95868    26</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10   24.95868    17</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11   24.95868    28</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12   38.61929    14</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13   38.61929    20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14   38.61929    24</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15   38.61929    28</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16   38.61929    26</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17   38.61929    34</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18   38.61929    34</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20   38.61929    26</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21   38.61929    36</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22   38.61929    60</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23   38.61929    80</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24   35.86207    20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25   35.86207    26</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26   35.86207    54</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 27   35.86207    32</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28   35.86207    40</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 31   35.86207    50</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33   40.33731    56</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 34   40.33731    76</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 35   40.33731    84</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 36   62.77227    36</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 37   62.77227    46</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 39   62.77227    32</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 40   62.77227    48</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 41   62.77227    52</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 42   62.77227    56</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 44   62.77227    66</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 45   69.38828    54</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 46   69.38828    70</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 47   69.38828    92</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 48   69.38828    93</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 49   69.38828   120</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    18.15164     4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6    15.74826    10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7    15.97616    18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8    15.97616    26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9    15.97616    34</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10   15.97616    17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11   15.97616    28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14   15.97616    24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15   15.97616    28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16   70.07172    26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17   70.07172    34</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18   70.07172    34</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19   70.07172    46</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20   70.07172    26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21   70.07172    36</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22   70.07172    60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24   70.07172    20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25   70.07172    26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26   70.07172    54</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27   70.07172    32</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28   70.07172    40</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29   65.37308    32</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30   65.37308    40</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31   65.37308    50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32   65.37308    42</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33   65.37308    56</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34   65.37308    76</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35   65.37308    84</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36   65.37308    36</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37   65.37308    46</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39   55.55965    32</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40   55.55965    48</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41   55.55965    52</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43   55.55965    64</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44   95.16223    66</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45   95.16223    54</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46   95.16223    70</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47   95.16223    92</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48   95.16223    93</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50   95.16223    85</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $repeat_1_fold_2</span>
@@ -247,16 +247,16 @@ truth values, and possibly the training tasks and trained model for each fold</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> $data</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $data</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    dist speed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33   56    18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5    16     8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23   80    14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11   28    11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24   20    15</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 25   26    15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4    22     7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12   14    12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 47   92    24</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1     2     4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43   64    20</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 31   50    17</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15   28    12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16   26    13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3     4     7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26   54    15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44   66    22</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41   52    20</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $target</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "dist"</span>
@@ -272,23 +272,23 @@ truth values, and possibly the training tasks and trained model for each fold</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $X</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    dist speed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33   56    18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5    16     8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23   80    14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11   28    11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24   20    15</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 25   26    15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4    22     7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12   14    12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 47   92    24</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1     2     4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43   64    20</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 31   50    17</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15   28    12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16   26    13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3     4     7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26   54    15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44   66    22</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41   52    20</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $y</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 18  8 14 15  7 12 24  4 17 12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 11 15 15 20 17 13  7 15 22 20</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $model</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> raw: 13.5 Kb </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> raw: 12.1 Kb </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> call:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   xgb.train(params = params, data = dtrain, nrounds = nrounds, </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     watchlist = watchlist, verbose = verbose, print_every_n = print_every_n, </span>
@@ -307,11 +307,11 @@ truth values, and possibly the training tasks and trained model for each fold</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      iter train_rmse</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;num&gt;      &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         1  37.308791</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         2  30.122782</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         1  33.435697</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         2  26.106653</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         9  10.027373</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        10   8.694544</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         9   9.681809</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        10   9.339508</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $task</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Regression"</span>
@@ -325,46 +325,46 @@ truth values, and possibly the training tasks and trained model for each fold</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $repeat_1_fold_2$predictions</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    prediction truth</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2    1.704688    10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3   18.878887     4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6   17.978888    10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7   18.887407    18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8   18.887407    26</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9   18.887407    34</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10  18.887407    17</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11  18.887407    28</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13  18.887407    20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14  18.887407    24</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16  65.562981    26</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17  65.562981    34</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18  65.562981    34</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19  65.562981    46</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20  65.562981    26</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21  65.562981    36</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22  65.562981    60</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24  31.929056    20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26  31.929056    54</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 27  49.184036    32</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28  49.184036    40</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29  49.184036    32</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30  49.184036    40</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 32  52.327648    42</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 34  52.327648    76</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 35  52.327648    84</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 36  52.327648    36</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 37  52.327648    46</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 38  52.327648    68</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 39  52.327648    32</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 40  52.327648    48</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 41  52.327648    52</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 42  52.327648    56</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 43  52.327648    64</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 44  72.569427    66</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 45  72.569427    54</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 46  72.569427    70</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 48  72.569427    93</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 49  72.569427   120</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 50  72.569427    85</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    3.617297     2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2    3.617297    10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4    3.617297    22</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5    3.617297    16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6   26.555292    10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7   26.555292    18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8   26.555292    26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9   26.555292    34</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10  26.555292    17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12  26.290144    14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13  26.290144    20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14  26.290144    24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15  26.290144    28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17  26.290144    34</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18  26.290144    34</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19  26.290144    46</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20  31.797541    26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21  31.797541    36</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22  31.797541    60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23  31.797541    80</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27  48.042599    32</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28  48.042599    40</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29  48.042599    32</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30  48.042599    40</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32  48.042599    42</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33  48.042599    56</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34  48.042599    76</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35  48.042599    84</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36  55.321716    36</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37  55.321716    46</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38  55.321716    68</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39  55.321716    32</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40  55.321716    48</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42  55.321716    56</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45  55.321716    54</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46  55.321716    70</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47  55.321716    92</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48  55.321716    93</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49  55.321716   120</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50  55.321716    85</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $repeat_1_fold_3</span>
@@ -390,16 +390,16 @@ truth values, and possibly the training tasks and trained model for each fold</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> $data</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $data</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    dist speed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 49  120    24</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11   28    11</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24   20    15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 46   70    24</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2    10     4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33   56    18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34   76    18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35   84    18</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 37   46    19</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16   26    13</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3     4     7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 45   54    23</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 41   52    20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17   34    13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46   70    24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47   92    24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48   93    24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20   26    14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50   85    25</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $target</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "dist"</span>
@@ -415,23 +415,23 @@ truth values, and possibly the training tasks and trained model for each fold</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $X</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    dist speed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 49  120    24</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11   28    11</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24   20    15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 46   70    24</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2    10     4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33   56    18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34   76    18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35   84    18</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 37   46    19</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16   26    13</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3     4     7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 45   54    23</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 41   52    20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17   34    13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46   70    24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47   92    24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48   93    24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20   26    14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50   85    25</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $y</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 24 11 15 24  4 19 13  7 23 20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 18 18 18 19 13 24 24 24 14 25</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $model</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> raw: 13.1 Kb </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> raw: 12.3 Kb </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> call:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   xgb.train(params = params, data = dtrain, nrounds = nrounds, </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     watchlist = watchlist, verbose = verbose, print_every_n = print_every_n, </span>
@@ -450,11 +450,11 @@ truth values, and possibly the training tasks and trained model for each fold</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      iter train_rmse</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;num&gt;      &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         1   42.15338</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         2   34.14140</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         1  52.159711</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         2  39.615670</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         9   13.07155</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        10   12.43242</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         9  10.634539</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        10   9.889692</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $task</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Regression"</span>
@@ -468,46 +468,46 @@ truth values, and possibly the training tasks and trained model for each fold</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $repeat_1_fold_3$predictions</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    prediction truth</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1    8.223087     2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4    4.146549    22</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5    4.146549    16</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6   24.755972    10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7   24.755972    18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8   24.755972    26</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9   24.755972    34</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10  24.755972    17</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12  24.755972    14</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13  24.755972    20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14  24.755972    24</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15  24.755972    28</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17  24.755972    34</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18  24.755972    34</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19  24.755972    46</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20  21.607246    26</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21  21.607246    36</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22  21.607246    60</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23  21.607246    80</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25  21.607246    26</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26  21.607246    54</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 27  21.607246    32</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28  21.607246    40</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29  44.534454    32</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30  44.534454    40</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 31  44.534454    50</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 32  44.534454    42</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33  44.534454    56</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 34  44.534454    76</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 35  44.534454    84</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 36  44.534454    36</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 38  44.534454    68</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 39  47.525826    32</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 40  47.525826    48</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 42  47.525826    56</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 43  47.525826    64</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 44  51.176704    66</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 47  83.871628    92</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 48  83.871628    93</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 50  83.871628    85</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    30.21178     2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2    30.21178    10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    30.21178     4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4    30.21178    22</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5    30.21178    16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6    30.21178    10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7    30.21178    18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8    30.21178    26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9    30.21178    34</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10   30.21178    17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11   30.21178    28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12   30.21178    14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13   30.21178    20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14   30.21178    24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15   30.21178    28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16   30.21178    26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18   30.21178    34</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19   30.21178    46</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21   26.38783    36</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22   26.38783    60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23   26.38783    80</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24   26.38783    20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25   26.38783    26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26   26.38783    54</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27   67.51583    32</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28   67.51583    40</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29   67.51583    32</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30   67.51583    40</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31   67.51583    50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32   67.51583    42</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36   48.36531    36</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38   48.36531    68</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39   48.36531    32</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40   48.36531    48</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41   48.36531    52</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42   48.36531    56</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43   48.36531    64</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44   79.00748    66</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45   79.00748    54</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49   79.00748   120</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $repeat_1_fold_4</span>
@@ -533,16 +533,16 @@ truth values, and possibly the training tasks and trained model for each fold</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> $data</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $data</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    dist speed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13   20    12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 48   93    24</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 34   76    18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 39   32    20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 35   84    18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17   34    13</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 40   48    20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22   60    14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36   36    19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8    26    10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18   34    13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30   40    17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10   17    11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21   36    14</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 28   40    16</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 27   32    16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15   28    12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22   60    14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14   24    12</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $target</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "dist"</span>
@@ -558,23 +558,23 @@ truth values, and possibly the training tasks and trained model for each fold</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $X</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    dist speed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13   20    12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 48   93    24</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 34   76    18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 39   32    20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 35   84    18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17   34    13</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 40   48    20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22   60    14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36   36    19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8    26    10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18   34    13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30   40    17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10   17    11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21   36    14</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 28   40    16</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 27   32    16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15   28    12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22   60    14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14   24    12</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $y</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 12 24 18 20 18 13 20 14 16 16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 19 10 13 17 11 14 16 12 14 12</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $model</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> raw: 13 Kb </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> raw: 12.1 Kb </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> call:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   xgb.train(params = params, data = dtrain, nrounds = nrounds, </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     watchlist = watchlist, verbose = verbose, print_every_n = print_every_n, </span>
@@ -593,11 +593,11 @@ truth values, and possibly the training tasks and trained model for each fold</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      iter train_rmse</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;num&gt;      &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         1   43.90428</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         2   35.04533</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         1  26.863096</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         2  20.592494</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         9   10.88510</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        10    9.39124</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         9   6.652381</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        10   6.252455</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $task</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Regression"</span>
@@ -611,46 +611,46 @@ truth values, and possibly the training tasks and trained model for each fold</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $repeat_1_fold_4$predictions</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    prediction truth</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1    19.10866     2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2    19.10866    10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3    19.10866     4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4    19.10866    22</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5    19.10866    16</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6    19.10866    10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7    19.10866    18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8    19.10866    26</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9    19.10866    34</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10   19.10866    17</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11   19.10866    28</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12   19.10866    14</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14   19.10866    24</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15   19.10866    28</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16   32.30879    26</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18   32.30879    34</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19   32.30879    46</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20   50.11182    26</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21   50.11182    36</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23   50.11182    80</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24   34.89761    20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25   34.89761    26</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26   34.89761    54</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29   70.14961    32</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30   70.14961    40</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 31   70.14961    50</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 32   70.14961    42</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33   70.14961    56</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 36   43.25682    36</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 37   43.25682    46</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 38   43.25682    68</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 41   43.25682    52</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 42   43.25682    56</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 43   43.25682    64</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 44   73.74335    66</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 45   73.74335    54</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 46   73.74335    70</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 47   73.74335    92</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 49   73.74335   120</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 50   73.74335    85</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    22.44849     2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2    22.44849    10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    22.44849     4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4    22.44849    22</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5    22.44849    16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6    22.44849    10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7    22.44849    18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9    22.44849    34</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11   18.97561    28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12   24.59251    14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13   24.59251    20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16   32.68624    26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17   32.68624    34</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19   32.68624    46</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20   42.25411    26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23   42.25411    80</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24   38.36000    20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25   38.36000    26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26   38.36000    54</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27   38.36000    32</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29   38.36000    32</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31   38.36000    50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32   34.85198    42</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33   34.85198    56</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34   34.85198    76</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35   34.85198    84</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37   34.85198    46</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38   34.85198    68</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39   34.85198    32</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40   34.85198    48</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41   34.85198    52</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42   34.85198    56</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43   34.85198    64</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44   34.85198    66</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45   34.85198    54</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46   34.85198    70</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47   34.85198    92</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48   34.85198    93</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49   34.85198   120</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50   34.85198    85</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $repeat_1_fold_5</span>
@@ -676,16 +676,16 @@ truth values, and possibly the training tasks and trained model for each fold</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> $data</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $data</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    dist speed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18   34    13</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 36   36    19</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8    26    10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20   26    14</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 42   56    20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10   17    11</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 44   66    22</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14   24    12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21   36    14</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26   54    15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7    18    10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9    34    10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45   54    23</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19   46    13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32   42    18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40   48    20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6    10     9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27   32    16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39   32    20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29   32    17</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $target</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "dist"</span>
@@ -701,23 +701,23 @@ truth values, and possibly the training tasks and trained model for each fold</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $X</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    dist speed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18   34    13</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 36   36    19</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8    26    10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20   26    14</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 42   56    20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10   17    11</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 44   66    22</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14   24    12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21   36    14</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26   54    15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7    18    10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9    34    10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 45   54    23</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19   46    13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32   42    18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 40   48    20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6    10     9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27   32    16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 39   32    20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29   32    17</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $y</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 13 19 10 14 20 11 22 12 14 15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 10 10 23 13 18 20  9 16 20 17</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $model</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##### xgb.Booster</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> raw: 12.6 Kb </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> raw: 12.5 Kb </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> call:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   xgb.train(params = params, data = dtrain, nrounds = nrounds, </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     watchlist = watchlist, verbose = verbose, print_every_n = print_every_n, </span>
@@ -736,11 +736,11 @@ truth values, and possibly the training tasks and trained model for each fold</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> evaluation_log:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      iter train_rmse</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     &lt;num&gt;      &lt;num&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         1  30.639935</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         2  23.698446</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         1  27.584453</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         2  21.129645</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         9   6.106534</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        10   5.321504</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         9   7.016015</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        10   6.520402</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $task</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Regression"</span>
@@ -754,46 +754,46 @@ truth values, and possibly the training tasks and trained model for each fold</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $repeat_1_fold_5$predictions</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    prediction truth</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1    22.49945     2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2    22.49945    10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3    22.49945     4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4    22.49945    22</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5    22.49945    16</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6    22.49945    10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7    22.49945    18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9    22.49945    34</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11   19.02658    28</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12   22.85428    14</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13   22.85428    20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15   22.85428    28</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16   30.75776    26</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17   30.75776    34</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19   30.75776    46</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22   30.34848    60</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23   30.34848    80</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24   46.62649    20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25   46.62649    26</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 27   46.62649    32</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28   46.62649    40</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29   37.32992    32</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30   37.32992    40</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 31   37.32992    50</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 32   37.32992    42</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33   37.32992    56</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 34   37.32992    76</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 35   37.32992    84</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 37   37.32992    46</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 38   37.32992    68</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 39   52.77045    32</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 40   52.77045    48</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 41   52.77045    52</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 43   52.77045    64</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 45   54.27045    54</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 46   54.27045    70</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 47   54.27045    92</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 48   54.27045    93</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 49   54.27045   120</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 50   54.27045    85</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    9.347319     2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2    9.347319    10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    9.347319     4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4    9.347319    22</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5    9.347319    16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8   24.815767    26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10  24.815767    17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11  24.815767    28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12  39.433372    14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13  39.433372    20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14  39.433372    24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15  39.433372    28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16  39.433372    26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17  39.433372    34</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18  39.433372    34</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20  39.433372    26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21  39.433372    36</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22  39.433372    60</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23  39.433372    80</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24  31.884920    20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25  31.884920    26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26  31.884920    54</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28  31.884920    40</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30  31.884920    40</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31  31.884920    50</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33  38.897491    56</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 34  38.897491    76</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 35  38.897491    84</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 36  38.897491    36</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 37  38.897491    46</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 38  38.897491    68</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41  38.897491    52</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 42  38.897491    56</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 43  38.897491    64</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 44  43.477551    66</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46  43.477551    70</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47  43.477551    92</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48  43.477551    93</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49  43.477551   120</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50  43.477551    85</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>

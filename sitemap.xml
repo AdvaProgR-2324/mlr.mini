@@ -19,6 +19,42 @@
     <loc>/reference/Dataset.html</loc>
   </url>
   <url>
+    <loc>/reference/EvaluatorAUC.ResamplePrediction.html</loc>
+  </url>
+  <url>
+    <loc>/reference/EvaluatorAUC.data.frame.html</loc>
+  </url>
+  <url>
+    <loc>/reference/EvaluatorAUC.html</loc>
+  </url>
+  <url>
+    <loc>/reference/EvaluatorAccuracy.ResamplePrediction.html</loc>
+  </url>
+  <url>
+    <loc>/reference/EvaluatorAccuracy.data.frame.html</loc>
+  </url>
+  <url>
+    <loc>/reference/EvaluatorAccuracy.html</loc>
+  </url>
+  <url>
+    <loc>/reference/EvaluatorMAE.ResamplePrediction.html</loc>
+  </url>
+  <url>
+    <loc>/reference/EvaluatorMAE.data.frame.html</loc>
+  </url>
+  <url>
+    <loc>/reference/EvaluatorMAE.html</loc>
+  </url>
+  <url>
+    <loc>/reference/EvaluatorRMSE.ResamplePrediction.html</loc>
+  </url>
+  <url>
+    <loc>/reference/EvaluatorRMSE.data.frame.html</loc>
+  </url>
+  <url>
+    <loc>/reference/EvaluatorRMSE.html</loc>
+  </url>
+  <url>
     <loc>/reference/InducerConstructer.html</loc>
   </url>
   <url>
@@ -47,6 +83,12 @@
   </url>
   <url>
     <loc>/reference/copy.html</loc>
+  </url>
+  <url>
+    <loc>/reference/evaluate.html</loc>
+  </url>
+  <url>
+    <loc>/reference/evaluators_list.html</loc>
   </url>
   <url>
     <loc>/reference/fit.Inducer.html</loc>
@@ -116,6 +158,18 @@
   </url>
   <url>
     <loc>/reference/print.Dataset.html</loc>
+  </url>
+  <url>
+    <loc>/reference/print.EvaluatorAUC.html</loc>
+  </url>
+  <url>
+    <loc>/reference/print.EvaluatorAccuracy.html</loc>
+  </url>
+  <url>
+    <loc>/reference/print.EvaluatorMAE.html</loc>
+  </url>
+  <url>
+    <loc>/reference/print.EvaluatorRMSE.html</loc>
   </url>
   <url>
     <loc>/reference/print.Inducer.html</loc>
