@@ -1,26 +1,32 @@
-test_that("Test InducerXgboost", {
+test_that("Test Inducer", {
+  
+  # Load Data:
+  cars.data <- Dataset(cars, target = "dist")
   
   # Test constructer:
-  InducerXgboost <- InducerConstructer(configuration = list(nrounds = 100, 
-                                                            max_depth = 6, 
-                                                            eta = 0.3),
-                                       method = "Xgboost")
+  xgb <- InducerXGBoost(nrounds = 100, max_depth = 6, eta = 0.3)
+  xgb_mod <- InducerXGBoost(cars.data, nrounds = 10, verbose = 0)
   
-  expect_s3_class(InducerXgboost, c("InducerXgboost", "Inducer"))
+  rf <- InducerRandomForest(maxnodes = 6)
+  rf_mod <- InducerRandomForest(cars.data, maxnodes = 6)
+  expect_s3_class(rf_mod$inducer, c("InducerRandomForest", "Inducer"))
+  
+  expect_s3_class(xgb, c("InducerXgboost", "Inducer"))
+  expect_s3_class(xgb_mod, "Model")
   
   # Test copy:
-  NewInducerXgboost <- copy(InducerXgboost, new_configuration = list(nrounds = 20))
-  expect_s3_class(NewInducerXgboost, c("InducerXgboost", "Inducer"))
+  new_xgb <- copy(xgb, new_configuration = list(nrounds = 20))
+  expect_s3_class(new_xgb, c("InducerXgboost", "Inducer"))
   
   # Test configuration:
-  expect_equal(configuration(InducerXgboost), 
+  expect_equal(configuration(xgb), 
                list(nrounds = 100, max_depth = 6, eta = 0.3))
-  expect_equal(configuration(NewInducerXgboost), 
+  expect_equal(configuration(new_xgb), 
                list(nrounds = 20, max_depth = 6, eta = 0.3))
-  expect_equal(configuration(copy(InducerXgboost)), 
+  expect_equal(configuration(copy(xgb)), 
                list(nrounds = 100, max_depth = 6, eta = 0.3))
-  configuration(InducerXgboost) <- list(nrounds = 10, max_depth = 4, verbose = 0)
-  expect_equal(configuration(InducerXgboost),
+  configuration(xgb) <- list(nrounds = 10, max_depth = 4, verbose = 0)
+  expect_equal(configuration(xgb),
                list(nrounds = 10, max_depth = 4, eta = 0.3, verbose = 0))
   
 })
