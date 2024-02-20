@@ -11,10 +11,16 @@
 
 \item{task}{String that is either of value \code{"regression"} or \code{"classification"}}
 
-\item{training_data}{Data.Frame extracted from the \code{data} field of the \code{Dataset} class.}
+\item{training_data}{Data.Frame or Matrix extracted from the \code{data} field
+of the \code{Dataset} class.}
 
-\item{response}{String that stores the name of the target variable}
+\item{response}{String that stores the name of the target variable and is
+extracted from the \code{target} field of the \code{Dataset} class.}
 }
 \description{
-Fit an XGBoost model.
+This internal function uses an inducer of class \code{InducerXGBoost}
+to fit an XGboost model to the given training dataset.
+}
+\details{
+We use \code{xgboost::xgboost()} for the model fitting.
 }

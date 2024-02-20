@@ -22,6 +22,7 @@ Imports:
   Matrix,
   stringr,
   xgboost,
+  randomForest,
   pROC
 Suggests:
   testthat
@@ -29,9 +30,11 @@ RoxygenNote: 7.3.0
 Collate: 
     'Dataset.R'
     'Hyperparams.R'
-    'constructFormula.R'
-    'InducerXgboost.R'
     'Inducer.R'
+    'constructFormula.R'
+    'InducerGlm.R'
+    'InducerRandomForest.R'
+    'InducerXgboost.R'
     'Models.R'
     'Resampling.R'
     'evaluators.R'

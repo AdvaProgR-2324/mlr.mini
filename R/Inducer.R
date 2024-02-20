@@ -1,12 +1,11 @@
-#' @include InducerXgboost.R
 
-#' @title Inducer S3 class
+#' @title Inducer S3 class.
 #' @param configuration Named list of hyperparameters.
 #' @param method String that stores the name of the method.
 #' @export
 InducerConstructer <- function(configuration, method) {
   # TO DO: Check validity of hyperparameters!
-  assertList(configuration, names = "named")
+  assertList(configuration, names = "named", null.ok = TRUE)
   assertCharacter(method, len=1)
   hyperparameters <- names(configuration)
   Inducer <- structure(
@@ -15,7 +14,7 @@ InducerConstructer <- function(configuration, method) {
       hyperparameters = hyperparameters,
       configuration = configuration
     ),
-    class =  c(paste0("Inducer", method), "Inducer")
+    class =  c(paste0("Inducer", method), "Inducer", "function")
   )
   Inducer
 }
@@ -25,9 +24,14 @@ InducerConstructer <- function(configuration, method) {
 #' @param x S3 object of class `Inducer`.
 #' @param ... Additional arguments.
 #' @export
-print.Inducer <- function(x,...) {
-  config <- do.call(paste, c(list(x$hyperparameters, x$configuration),
-                             list(sep=" = ", collapse=", ")))
+print.Inducer <- function(x, ...) {
+  if (is.null(x$hyperparameters)) {
+    config <- "default"
+  }
+  else{
+    config <- do.call(paste, c(list(x$hyperparameters, x$configuration),
+                               list(sep=" = ", collapse=", ")))
+  }
   cat(sprintf("Inducer: %s\nConfiguration: %s", x$method, config))
   invisible(x)
 }
@@ -40,18 +44,27 @@ print.Inducer <- function(x,...) {
 
 
 
-#' @title Create copy of an inducer.
+#' @title S3 generic to copy an inducer.
+#' @description
+#' Method that produces copies of instances of `Inducer` class that contain a
+#' new hyperparameter configuration.
+#' @param .inducer S3 object of class `Inducer`.
+#' @param new_configuration Named List containing the hyperparameter
 #' 
-#' @description S3 generic.
-#'  
-#' @details This function creates a copy of the passed inducer with new config-
-#'  uration values. New configuration values which have not been passed during
+#' @export
+copy <- function(.inducer, new_configuration) UseMethod("copy")
+
+#' @title Create copy of an inducer.
+#'   
+#' @description
+#'  This function creates a copy of the passed inducer with new configuration values.
+#'  New configuration values which have not been passed during
 #'  initialization are added to the copy, while already present configuration
 #'  values are overwritten in the copy.
 #' 
 #' @param .inducer S3 object of class `Inducer`.
 #' @param new_configuration Named List, containing the hyperparameter
-#'  configuration
+#'  configuration.
 #'
 #' @returns A new instance of class `Inducer` with new configuration values. If
 #'  no new configurations are passed, the original inducer is returned.
@@ -64,16 +77,6 @@ print.Inducer <- function(x,...) {
 #' print(NewInducerXgboost)
 #' NewInducerXgboost <- copy(InducerXgboost)
 #' print(NewInducerXgboost)
-#' @export
-copy <- function(.inducer, new_configuration) UseMethod("copy")
-
-#' @title Copy an inducer.
-#' @description
-#' Method that produces copies of instances of `Inducer` class that contain a
-#' new hyperparameter configuration.
-#' @param .inducer S3 object of class `Inducer`.
-#' @param new_configuration Named List containing the hyperparameter
-#' 
 #' @export
 copy.Inducer <- function(.inducer, new_configuration) {
   # TO DO: Check validity of hyperparameters!
@@ -95,9 +98,9 @@ copy.Inducer <- function(.inducer, new_configuration) {
 
 #' @title Accessor for the `configuration` of an inducer.
 #' @description
-#' S3 generic
+#' S3 generic.
 #' 
-#' @param x S3 object
+#' @param x S3 object.
 #' @returns Named list of hyperparameter configurations.
 #' @export
 configuration <- function(x) UseMethod("configuration")
@@ -110,7 +113,7 @@ configuration.Inducer <- function(x) x$configuration
 
 #' @title Setter for the `configuration` of an inducer.
 #' @description S3 generic. Set new configuration values for the hyperparameters of a given inducer.
-#' @param object S3 object
+#' @param object S3 object.
 #' @param value Named list of configurations.
 #' @export
 `configuration<-` <- function(object, value) {
@@ -127,10 +130,26 @@ configuration.Inducer <- function(x) x$configuration
 }
 
 
+#' @title S3 (helper) generic for fitting specific Inducers.
+#' 
+#' @description This internal function uses a specific inducer of class `InducerXxx`
+#'  to fit a corresponding model to the given training dataset.
+#'
+#' @param .inducer An S3 object of (sub-)class `InducerXxx`.
+#' @param training_data Data.Frame or Matrix extracted from the `data` field
+#'  of the `Dataset` class.
+#' @param response String that stores the name of the target variable and is
+#'  extracted from the `target` field of the `Dataset` class.
+#' @param task String that is either of value `"regression"` or `"classification"`
+#'
+#' @export
+fit2 <- function(.inducer, task, training_data, response) UseMethod("fit2")
+
+
 
 #' @title S3 generic for model fit on inducers.
 #' 
-#' @param .inducer S3 object of class Inducer.
+#' @param .inducer S3 object of class `Inducer`.
 #' @param .data S3 object of class Dataset.
 #' @param ... Additional arguments.
 #' @returns S3 object of class `Model`.
@@ -177,14 +196,5 @@ fit.Inducer <- function(.inducer, .data, ...) {
 #' @export
 print.Model <- function(x, ...) {
   cat(sprintf('%s Model: "%s" fitted on "%s" dataset.', x$task, x$inducer$method,
-          x$data$name))
+              x$data$name))
 }
-
-
-# Test:
-# meep <- fit(InducerXgboost, cars.data, eta = 0.2, nrounds = 10, verbose = 0)
-# meep
-# meep$inducer
-# meep$data
-# meep$model
-# meep$model$feature_names
