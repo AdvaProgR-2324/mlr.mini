@@ -25,7 +25,7 @@ inducer <- function(model) {
 #' @description
 #' this functions returns the configuration of a model 
 #' 
-#' @param model A model object
+#' @param x A model object
 #' @examples
 #' cars.data <- Dataset(data = cars, target = "dist")
 #' xgb <- InducerConstructer(configuration = list(nrounds = 10, verbose = 0), method = "XGBoost")
@@ -61,6 +61,9 @@ modelObject <- function(model) {
 #' 
 #' @param model A model object
 #' @examples
+#' cars.data <- Dataset(data = cars, target = "dist")
+#' xgb <- InducerConstructer(configuration = list(nrounds = 10, verbose = 0), method = "XGBoost")
+#' model.xgb <- fit(xgb, cars.data)
 #' modelInfo(model.xgb)
 #' @export
 modelInfo <- function(model) {
@@ -122,10 +125,7 @@ predict.ModelXGBoost <- function(object, ..., newdata, type = "response") {
 #' @param type A character string specifying the type of prediction: "response", "se" (standard error), or "prob" (probability). The default is "response".
 #' 
 #' @examples
-#' model.lm <- lm(dist ~ speed, data = cars)
-#' predict(model.lm, newdata = data.frame(speed = 10))
-#' prediction <- predict(model.lm, newdata = cars.data[c(1, 2, 3, 4), ])
-#' prediction
+#' # to do
 #' @export
 predict.ModelGlm <- function(object, ..., newdata, type = "response") {
   # Input Checks
@@ -159,7 +159,6 @@ predict.ModelGlm <- function(object, ..., newdata, type = "response") {
   return(result)
 }
 
-
 #' @title Predictions for Dummy
 #' 
 #' @description
@@ -171,10 +170,7 @@ predict.ModelGlm <- function(object, ..., newdata, type = "response") {
 #' @param type A character string specifying the type of prediction: "response", "se" (standard error), or "prob" (probability). The default is "response".
 #' 
 #' @examples
-#' model.dummy <- dummy(data = cars, target = "dist")
-#' predict(model.dummy, newdata = data.frame(speed = 10))
-#' prediction <- predict(model.dummy, newdata = cars.data[c(1, 2, 3, 4), ])
-#' prediction
+#' # to do
 #' @export
 predict.ModelDummy <- function(object, ..., newdata, type = "response") {
   # Input Checks
@@ -211,10 +207,7 @@ predict.ModelDummy <- function(object, ..., newdata, type = "response") {
 #' @param type A character string specifying the type of prediction: "response", "se" (standard error), or "prob" (probability). The default is "response".
 #' 
 #' @examples
-#' model.rf <- rf(cars.data)
-#' predict(model.rf, newdata = data.frame(speed = 10))
-#' prediction <- predict(model.rf, newdata = cars.data[c(1, 2, 3, 4), ])
-#' prediction
+#' # to do
 #' @export
 predict.ModelRandomForest <- function(object, ..., newdata, type = "response") {
   # Input Checks
