@@ -21,7 +21,8 @@ Imports:
   checkmate,
   Matrix,
   stringr,
-  xgboost
+  xgboost,
+  pROC
 Suggests:
   testthat
 RoxygenNote: 7.3.0
