@@ -61,6 +61,12 @@
     <loc>/reference/fit2.html</loc>
   </url>
   <url>
+    <loc>/reference/hp.html</loc>
+  </url>
+  <url>
+    <loc>/reference/hpCheck.html</loc>
+  </url>
+  <url>
     <loc>/reference/hyperparameters.SplitConstructorCV.html</loc>
   </url>
   <url>
@@ -88,6 +94,15 @@
     <loc>/reference/modelObject.html</loc>
   </url>
   <url>
+    <loc>/reference/p_fct.html</loc>
+  </url>
+  <url>
+    <loc>/reference/p_int.html</loc>
+  </url>
+  <url>
+    <loc>/reference/p_num.html</loc>
+  </url>
+  <url>
     <loc>/reference/predict.ModelDummy.html</loc>
   </url>
   <url>
@@ -110,6 +125,9 @@
   </url>
   <url>
     <loc>/reference/print.SplitInstance.html</loc>
+  </url>
+  <url>
+    <loc>/reference/print.hp.html</loc>
   </url>
   <url>
     <loc>/reference/resample.html</loc>
