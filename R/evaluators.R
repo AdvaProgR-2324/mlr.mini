@@ -218,18 +218,23 @@ print.EvaluatorAUC <- function(x, ...) {
   cat("Configuration: ()\n")
 }
 
-<<<<<<< HEAD
-evl <- list2env(
+
+class(EvaluatorMAE) <- "EvaluatorMAE"
+class(EvaluatorRMSE) <- "EvaluatorRMSE"
+class(EvaluatorAccuracy) <- "EvaluatorAccuracy"
+class(EvaluatorAUC) <- "EvaluatorAUC"
+
+# First, create a list of your evaluator functions
+evaluators_list <- list(
   mae = EvaluatorMAE,
   rmse = EvaluatorRMSE,
   accuracy = EvaluatorAccuracy,
   auc = EvaluatorAUC
 )
 
-class(EvaluatorMAE) <- "EvaluatorMAE"
-class(EvaluatorRMSE) <- "EvaluatorRMSE"
-class(EvaluatorAccuracy) <- "EvaluatorAccuracy"
-class(EvaluatorAUC) <- "EvaluatorAUC"
+# Now, convert this list to an environment
+evl <- list2env(evaluators_list)
+
 
 # Generic evaluate function
 evaluate <- function(evaluator, .prediction, .dataset = NULL, .model = NULL, ...) {
