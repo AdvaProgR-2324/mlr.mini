@@ -23,10 +23,7 @@ EvaluatorMAE <- function(.prediction) {
 EvaluatorMAE.data.frame <- function(.prediction) {
   assertNames(names(.prediction), subset.of = c("prediction", "truth"))
   result <- mean(abs(.prediction$prediction - .prediction$truth))
-  # Create a result object with a class
-  result_obj <- list(value = result)
-  class(result_obj) <- "EvaluatorMAE"
-  return(result_obj)
+  result
 }
 
 #' @title Mean Absolute Error method for ResamplePrediction
@@ -59,7 +56,6 @@ EvaluatorMAE.ResamplePrediction <- function(.prediction) {
 print.EvaluatorMAE <- function(x, ...) {
   cat("Evaluator: Mean Absolute Error\n")
   cat("Configuration: ()\n")
-  cat("Value:", x$value, "\n")
 }
 
 #' @title Root Mean Squared Error generic function
@@ -226,6 +222,7 @@ print.EvaluatorAUC <- function(x, ...) {
 }
 
 evl <- new.env()
+class(EvaluatorMAE) <- "EvaluatorMAE"
 evl$mae <- EvaluatorMAE
 evl$rmse <- EvaluatorRMSE
 evl$accuracy <- EvaluatorAccuracy
