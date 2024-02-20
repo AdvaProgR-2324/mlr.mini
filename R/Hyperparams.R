@@ -1,5 +1,8 @@
+
 #' @title Hyperparameters S3 class
+#' 
 #' @description A set of functions to define hyperparameters for a model
+#' 
 #' @param ... A set of hyperparameters
 #' @examples 
 #' hpx <- hp(x = p_num(0, 1), y = p_int(1, Inf), z = p_fct(letters))
@@ -19,7 +22,9 @@ hp <- function(...) {
 }
 
 #' @title 'print' methode for `hp` class
+#' 
 #' @description Print an hp object
+#' 
 #' @param x An hp object
 #' @param ... Additional arguments
 #' @examples
@@ -32,7 +37,9 @@ print.hp <- function(x, ...) {
 }
 
 #' @title Hyperparameter check
+#' 
 #' @description Check if an element is in the hyperparameter space
+#' 
 #' @param check A list of hyperparameters
 #' @param hp A hyperparameter space
 #' @examples
@@ -61,7 +68,9 @@ hpCheck <- function(check, hp) {
 }
 
 #' @title Numeric Range
+#' 
 #' @description Define ranges for numeric hyperparameters
+#' 
 #' @param lower Lower bound
 #' @param upper Upper bound
 #' @examples
@@ -75,7 +84,9 @@ p_num <- function(lower, upper) {
 }
 
 #' @title Integer Range
+#' 
 #' @description Define ranges for integer hyperparameters
+#' 
 #' @param lower Lower bound
 #' @param upper Upper bound
 #' @examples
@@ -90,7 +101,9 @@ p_int <- function(lower, upper) {
 }
 
 #' @title Factor Range
+#' 
 #' @description Define ranges for factor hyperparameters
+#' 
 #' @param ... A set of factors
 #' @examples
 #' p_fct(letters)

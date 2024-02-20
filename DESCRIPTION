@@ -23,6 +23,7 @@ Imports:
   stringr,
   xgboost
   randomForest
+  pROC
 Suggests:
   testthat
 RoxygenNote: 7.3.0
