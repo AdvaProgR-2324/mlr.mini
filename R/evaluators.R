@@ -37,6 +37,7 @@ EvaluatorMAE.data.frame <- function(.prediction) {
 #' cv5 <- splt$cv(folds = 5)
 #' rp <- resample(cars.data, xgb, cv5)
 #' #EvaluatorMAE(rp)
+#' @export
 EvaluatorMAE.ResamplePrediction <- function(.prediction) {
   res <- numeric(length(.prediction))
   for (split in names(.prediction)) {
