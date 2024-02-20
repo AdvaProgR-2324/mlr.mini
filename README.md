@@ -22,10 +22,18 @@ Here is a basic example of how to use `mlr.mini`:
 
 ### Train a model
 
+Construct an Inducer carrying some hyperparameters and than fit it:
+
+```r
+ind <- InducerXGBoost(verbose = 0, nrounds = 10)
+configuration(ind)
+```
+
+Or fit the data set directly:
+
 ``` r
 cars.data <- Dataset(data = cars, target = "dist")
-xgb <- InducerConstructer(configuration = list(nrounds = 10, verbose = 0), method = "XGBoost")
-model.xgb <- fit(xgb, cars.data)
+model.xgb <- InducerXGBoost(cars.data, verbose = 0, nrounds = 10)
 ```
 
 ### Make predictions
@@ -37,7 +45,9 @@ predict(model.xgb, newdata = data.frame(speed = 10))
 ### Evaluate the model
 
 ``` r
+cv5 <- splt$cv(folds = 5)
 cars.split <- cv5(cars.data)
 rp <- resample(cars.data, xgb, cars.split)
+mae <- evl$mae
 mae(rp)
 ```

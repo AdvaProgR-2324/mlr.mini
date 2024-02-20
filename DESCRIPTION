@@ -25,6 +25,8 @@ Imports:
   randomForest,
   pROC
 Suggests:
+  rmarkdown,
+  knitr,
   testthat
 RoxygenNote: 7.3.0
 Collate: 
@@ -39,3 +41,4 @@ Collate:
     'Resampling.R'
     'evaluators.R'
     'zzz.R'
+VignetteBuilder: knitr
