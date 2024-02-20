@@ -42,12 +42,18 @@ fit2.InducerRandomForest <- function(.inducer, task, training_data, response) {
 #' 
 #' @export 
 InducerRandomForest <- function(.data, ...) {
-  argdots <- list(...)
-  inducer <- InducerConstructer(configuration = argdots,
-                                method = "RandomForest")
+  self <- sys.function()
+  args <- as.list(sys.call())
   if (missing(.data)) {
+    kwargs <- args[-1]
+    formals(self)[names(kwargs)] <- as.pairlist(kwargs)
+    inducer <- InducerConstructer(configuration = kwargs,
+                                  method = "RandomForest")
     return(inducer)
   } else {
+    kwargs <- args[-c(1, 2)]
+    inducer <- InducerConstructer(configuration = kwargs,
+                                  method = "RandomForest")
     return(fit(inducer, .data = .data, ...))
   }
 }

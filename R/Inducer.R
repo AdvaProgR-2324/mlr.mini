@@ -25,14 +25,15 @@ InducerConstructer <- function(configuration, method) {
 #' @param ... Additional arguments.
 #' @export
 print.Inducer <- function(x, ...) {
-  if (is.null(x$hyperparameters)) {
-    config <- "default"
-  }
-  else{
-    config <- do.call(paste, c(list(x$hyperparameters, x$configuration),
-                               list(sep=" = ", collapse=", ")))
-  }
-  cat(sprintf("Inducer: %s\nConfiguration: %s", x$method, config))
+  print("Wheee")
+  # if (is.null(x$hyperparameters)) {
+  #   config <- "default"
+  # }
+  # else{
+  #   config <- do.call(paste, c(list(x$hyperparameters, x$configuration),
+  #                              list(sep=" = ", collapse=", ")))
+  # }
+  # cat(sprintf("Inducer: %s\nConfiguration: %s", x$method, config))
   invisible(x)
 }
 

@@ -67,14 +67,18 @@ fit2.InducerXGBoost <- function(.inducer, task, training_data, response) {
 #' 
 #' @export 
 InducerXGBoost <- function(.data, ...) {
-    self <- sys.function()
-    args <- as.list(sys.call())[-1]
-    formals(self)[names(args)] <- as.pairlist(args)
-    inducer <- InducerConstructer(configuration = args,
-                                         method = "XGBoost")
-    if (missing(.data)) {
-      return(inducer)
-    } else {
-      fit(inducer, .data = .data, ...)
-    }
+  self <- sys.function()
+  args <- as.list(sys.call())
+  if (missing(.data)) {
+    kwargs <- args[-1]
+    formals(self)[names(kwargs)] <- as.pairlist(kwargs)
+    inducer <- InducerConstructer(configuration = kwargs,
+                                  method = "XGBoost")
+    return(inducer)
+  } else {
+    kwargs <- args[-c(1, 2)]
+    inducer <- InducerConstructer(configuration = kwargs,
+                                  method = "XGBoost")
+    return(fit(inducer, .data = .data, ...))
+  }
 }
