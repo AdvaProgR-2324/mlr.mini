@@ -21,8 +21,8 @@ Imports:
   checkmate,
   Matrix,
   stringr,
-  xgboost
-  randomForest
+  xgboost,
+  randomForest,
   pROC
 Suggests:
   testthat
