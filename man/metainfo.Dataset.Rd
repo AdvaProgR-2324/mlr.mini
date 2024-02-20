@@ -2,7 +2,7 @@
 % Please edit documentation in R/Dataset.R
 \name{metainfo.Dataset}
 \alias{metainfo.Dataset}
-\title{'metainfo' method for Dataset objects}
+\title{'metainfo' method for \code{Dataset} objects}
 \usage{
 \method{metainfo}{Dataset}(x)
 }
@@ -10,7 +10,7 @@
 \item{x}{A Dataset object}
 }
 \description{
-Get the metainfo of a Dataset object (name, features, targets, nrow, type, missings)
+Get the metainfo of a Dataset object (name, features, targets, number of observations, type, missing values)
 }
 \examples{
 cars.data <- Dataset(data = cars, target = "dist")
