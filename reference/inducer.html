@@ -69,22 +69,8 @@
 <span class="r-in"><span><span class="va">xgb</span> <span class="op">&lt;-</span> <span class="fu"><a href="InducerConstructer.html">InducerConstructer</a></span><span class="op">(</span>configuration <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>nrounds <span class="op">=</span> <span class="fl">10</span>, verbose <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"XGBoost"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">model.xgb</span> <span class="op">&lt;-</span> <span class="fu"><a href="fit.html">fit</a></span><span class="op">(</span><span class="va">xgb</span>, <span class="va">cars.data</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">inducer</span><span class="op">(</span><span class="va">model.xgb</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $method</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "XGBoost"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $hyperparameters</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "nrounds" "verbose"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $configuration</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $configuration$nrounds</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $configuration$verbose</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "InducerXGBoost" "Inducer"        "function"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Inducer: XGBoost</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Configuration: nrounds = 10, verbose = 0</span>
 </code></pre></div>
     </div>
   </div>
