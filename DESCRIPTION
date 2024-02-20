@@ -21,15 +21,21 @@ Imports:
   checkmate,
   Matrix,
   stringr,
-  xgboost
+  xgboost,
+  randomForest,
+  pROC
 Suggests:
   testthat
 RoxygenNote: 7.3.0
 Collate: 
     'Dataset.R'
-    'constructFormula.R'
-    'InducerXgboost.R'
+    'Hyperparams.R'
     'Inducer.R'
+    'constructFormula.R'
+    'InducerGlm.R'
+    'InducerRandomForest.R'
+    'InducerXgboost.R'
     'Models.R'
     'Resampling.R'
+    'evaluators.R'
     'zzz.R'

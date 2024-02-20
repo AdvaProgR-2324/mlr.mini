@@ -2,7 +2,7 @@
 % Please edit documentation in R/Dataset.R
 \name{[.Dataset}
 \alias{[.Dataset}
-\title{'[' method for subsetting Dataset objects}
+\title{'[' method for subsetting \code{Dataset} objects}
 \usage{
 \method{[}{Dataset}(x, i, j)
 }

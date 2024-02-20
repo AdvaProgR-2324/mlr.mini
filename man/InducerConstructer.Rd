@@ -2,7 +2,7 @@
 % Please edit documentation in R/Inducer.R
 \name{InducerConstructer}
 \alias{InducerConstructer}
-\title{Inducer S3 class}
+\title{Inducer S3 class.}
 \usage{
 InducerConstructer(configuration, method)
 }
@@ -12,5 +12,5 @@ InducerConstructer(configuration, method)
 \item{method}{String that stores the name of the method.}
 }
 \description{
-Inducer S3 class
+Inducer S3 class.
 }

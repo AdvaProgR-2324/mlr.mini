@@ -7,7 +7,7 @@
 fit(.inducer, .data, ...)
 }
 \arguments{
-\item{.inducer}{S3 object of class Inducer.}
+\item{.inducer}{S3 object of class \code{Inducer}.}
 
 \item{.data}{S3 object of class Dataset.}
 
