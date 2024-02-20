@@ -28,9 +28,11 @@ Suggests:
 RoxygenNote: 7.3.0
 Collate: 
     'Dataset.R'
+    'Hyperparams.R'
     'constructFormula.R'
     'InducerXgboost.R'
     'InducerRandomForest.R'
     'Inducer.R'
     'Models.R'
+    'Resampling.R'
     'zzz.R'
