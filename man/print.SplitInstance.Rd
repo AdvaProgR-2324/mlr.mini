@@ -4,7 +4,7 @@
 \alias{print.SplitInstance}
 \title{'print' method for SplitInstance objects}
 \usage{
-print.SplitInstance(x, ...)
+\method{print}{SplitInstance}(x, ...)
 }
 \arguments{
 \item{x}{A SplitInstance object}

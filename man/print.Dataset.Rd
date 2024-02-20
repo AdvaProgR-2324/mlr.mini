@@ -4,7 +4,7 @@
 \alias{print.Dataset}
 \title{'print' method for \code{Dataset} objects}
 \usage{
-print.Dataset(x, ...)
+\method{print}{Dataset}(x, ...)
 }
 \arguments{
 \item{x}{A Dataset object}

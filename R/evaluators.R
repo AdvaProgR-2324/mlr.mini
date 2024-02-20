@@ -226,17 +226,12 @@ class(EvaluatorAUC) <- "EvaluatorAUC"
 
 #' Evaluators Environment
 #' @export
-
-# First, create a list of your evaluator functions
-evaluators_list <- list(
+evl <- list2env(list(
   mae = EvaluatorMAE,
   rmse = EvaluatorRMSE,
   accuracy = EvaluatorAccuracy,
   auc = EvaluatorAUC
-)
-
-# Now, convert this list to an environment
-evl <- list2env(evaluators_list)
+))
 
 
 #' Generic Evaluation Function

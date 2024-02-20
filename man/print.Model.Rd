@@ -4,7 +4,7 @@
 \alias{print.Model}
 \title{print method for \code{Model} class}
 \usage{
-print.Model(x, ...)
+\method{print}{Model}(x, ...)
 }
 \arguments{
 \item{x}{S3 object of class \code{Model}.}

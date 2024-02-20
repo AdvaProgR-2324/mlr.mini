@@ -4,7 +4,7 @@
 \alias{print.EvaluatorAUC}
 \title{'print' method for \code{EvaluatorAUC}}
 \usage{
-print.EvaluatorAUC(x, ...)
+\method{print}{EvaluatorAUC}(x, ...)
 }
 \arguments{
 \item{x}{An object of class \code{EvaluatorAUC}}
