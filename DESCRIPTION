@@ -23,6 +23,8 @@ Imports:
   stringr,
   xgboost
 Suggests:
+  rmarkdown,
+  knitr,
   testthat
 RoxygenNote: 7.3.0
 Collate: 
@@ -33,3 +35,4 @@ Collate:
     'Models.R'
     'Resampling.R'
     'zzz.R'
+VignetteBuilder: knitr

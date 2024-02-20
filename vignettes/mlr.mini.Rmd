@@ -1,0 +1,83 @@
+---
+title: "mlr.mini"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{How to use mlr.mini}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\usepackage[utf8]{inputenc}
+---
+
+# Introduction
+
+`mlr.mini` is a lightweight R package designed to simplify machine learning tasks by providing a unified interface for various algorithms. This vignette serves as a guide on how to use `mlr.mini` for model training, making predictions, evaluating model performance, and employing resampling techniques.
+
+# Installation
+
+If you haven't installed `mlr.mini` yet, you can do so by running the following command in your R console:
+
+```{r, eval=FALSE}
+devtools::install_github("advaprogr-2324/mlr.mini")
+```
+
+# Getting Started
+
+After installing, load the package into your R session:
+
+```{r}
+library("mlr.mini")
+```
+
+# Training a Model
+
+To train a model, you need to create a `Dataset` object and an `Inducer` object. The `Dataset` object contains the data and the target variable, while the `Inducer` object contains the configuration for the model. To construct the Inducer you can choose between the methods `XGBoost`, `RandomForest` and `Glm`. The `fit` function is then used to train the model.
+
+```{r}
+cars.data <- Dataset(data = cars, target = "dist")
+xgb <- InducerConstructer(configuration = list(nrounds = 10, verbose = 0), method = "XGBoost")
+model.xgb <- fit(xgb, cars.data)
+```
+
+# Making Predictions
+
+To make predictions, use the `predict` function. Predictions can be made on data.frames or on a `Dataset` object. As `Dataset` objects always contain the target variable, the `predict` function will return a data.frame with the predictions and the true values. If you want to make predictions on a data.frame, the `predict` function returns a vector of predictions.
+
+```{r}
+predict(model.xgb, newdata = data.frame(speed = 10))
+prediction <- predict(model.xgb, newdata = cars.data[c(1, 2, 3, 4), ])
+prediction
+```
+
+# Evaluation Model Performance
+
+To evaluate the performance of the model, use the `Evaluator` functions. The `Evaluator` functions take a data.frame with the predictions and the true values as input. The `Evaluator` functions return a numeric value that represents the performance of the model. The following `Evaluator` functions are available: `EvaluatorMAE`, `EvaluatorRMSE`, `EvaluatorAccuracy`, and `EvaluatorAUC`.
+
+```{r}
+EvaluatorMAE(prediction)
+EvaluatorRMSE(prediction)
+```
+
+All evaluation functions are available in the `evl` environment as well. 
+
+```{r}
+mae <- evl$mae
+mae(prediction)
+```
+
+# Resampling
+
+Resampling techniques are available in the `splt` environment. The `cv` function creates a `Split` object that can be used to split the data into folds. It takes the number of folds and the number of repeats as input. 
+
+The `Split` object can then be used to split the data into folds and returns an object of class `SplitInstance`.
+
+```{r}
+cv5 <- splt$cv(folds = 5)
+cars.split <- cv5(cars.data)
+```
+
+The `resample` function creates a `ResamplePrediction` object. The `ResamplePrediction` object contains the predictions made, the relevant ground truth values, and the training tasks and trained model for each fold. The `resample` function takes a `Dataset` object, an `Inducer` object, and a `SplitInstance` or `Split` object as input. An Evaluator can then be applied to a `ResamplePrediction` object to evaluate the performance of the model.
+
+```{r}
+rp <- resample(cars.data, xgb, cars.split)
+mae(rp)
+```
