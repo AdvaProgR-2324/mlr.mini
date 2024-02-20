@@ -2,9 +2,9 @@
 % Please edit documentation in R/Dataset.R
 \name{print.Dataset}
 \alias{print.Dataset}
-\title{'print' method for Dataset objects}
+\title{'print' method for \code{Dataset} objects}
 \usage{
-\method{print}{Dataset}(x, ...)
+print.Dataset(x, ...)
 }
 \arguments{
 \item{x}{A Dataset object}
@@ -15,6 +15,6 @@
 Print a Dataset object
 }
 \examples{
-cars.data <- Dataset(data = cars, target = "dist")
+cars.data <- Dataset(data = cars[c(1, 2, 3, 4), ], target = "dist")
 print(cars.data)
 }
