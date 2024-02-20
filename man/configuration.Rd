@@ -7,11 +7,11 @@
 configuration(x)
 }
 \arguments{
-\item{x}{S3 object}
+\item{x}{S3 object.}
 }
 \value{
 Named list of hyperparameter configurations.
 }
 \description{
-S3 generic
+S3 generic.
 }
