@@ -37,4 +37,5 @@ Collate:
     'InducerGlm.R'
     'Models.R'
     'Resampling.R'
+    'evaluators.R'
     'zzz.R'
