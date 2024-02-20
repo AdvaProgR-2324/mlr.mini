@@ -1,14 +1,19 @@
+library(checkmate)
+source("R/Dataset.R")
+source("R/Inducer.R")
+source("R/InducerXgboost.R")
+source("R/Models.R")
+
 #' @title Resampling S3 Class
 #' 
 #' @description
 #' Split the data into a training and a validation set
-
+#' 
 #' @param data A Dataset object containing the data
 #' @examples
 #' cars.data <- Dataset(data = cars, target = "dist")
-#' class(cars.data)
+#' str(Split(cars.data))
 #' @export
-#' 
 Split <- function(data){
   # Assertion
   assertClass(data, "Dataset")
@@ -29,16 +34,16 @@ Split <- function(data){
 
 #' @title SplitCV method for splitting the data
 #' 
-#' @description Split the data into 2 parts: the training and validation part
+#' @description Create a function that splits the data into 2 parts: the training and validation part
 #' 
 #' @param folds A numeric value: give the number of folds
 #' @param repeats A numeric value: the number of repetition
 #' @examples
+#' cv3 <- SplitCV(folds = 3, repeats = 2)
 #' cars.data <- Dataset(data = cars, target = "dist")
-#' cars.data[c(1, 2, 3, 4), ]
-#' cars.data[c(1, 2), "dist"]
+#' cars.split <- cv3(cars.data)
 #' @export
-SplitCV <- function(folds, repeats = 1){
+SplitCV <- function(folds, repeats = 1) {
   # Input checks
   assertNumeric(folds)
   assertNumeric(repeats)
@@ -80,28 +85,32 @@ SplitCV <- function(folds, repeats = 1){
   return(Spl)
 }
 
-#' set the class of the SplitCV object
+#' @name set_class_SplitCV
+#' @title set the class of the SplitCV object
 class(SplitCV) <- c("SplitConstructorCV", "SplitConstructor", "function")
 
 #' Create an environment for storing Split objects
+#' @export
 splt <- new.env()
 
-#' store the SplitCV object cv to the environment
+#' @name store_SplitCV_in_environment
+#' @title the SplitCV object cv to the environment
 splt$cv <- SplitCV
 
 
-#' @title 'print' method for SplitCV objects
+#' @title 'print' method for SplitInstance objects
 #' 
-#' @description Print a SplitCV object
+#' @description Print a SplitInstance object
 #' 
-#' @param x A SplitInstance objec
+#' @param x A SplitInstance object
 #' @param ... Additional arguments
 #' @examples
+#' cars.data <- Dataset(data = cars, target = "dist")
+#' cv5 <- splt$cv(folds = 5)
 #' cars.split <- cv5(cars.data)
-#' print(cars.data)
+#' print(cars.split)
 #' @export
-#' 
-print.SplitInstance <- function(x){
+print.SplitInstance <- function(x, ...){
   
   # number of rows in the dataset
   rows <- length(x[[1]]$validation) + length(x[[1]]$training)
@@ -114,13 +123,13 @@ print.SplitInstance <- function(x){
   # Split the string by dot and extract he name
   name <- strsplit(name, "\\.")[[1]][1]
 
-  cat("CV Split Instance of the \"", name, ", dataset (", rows, " rows)\n", sep = "")
+  cat("CV Split Instance of the \"", name, "\" dataset (", rows, " rows)\n", sep = "")
   cat("Configuration: folds = ", folds, ", repeats = ", repeats, "\n", sep = "")
   invisible(x)
 }
 
 
-##' @title 'hypaerparameters' generic function
+#' @title 'hyperparameters' generic function
 #' 
 #' @description Get information about the hyperparameters of an object
 #' 
@@ -132,7 +141,7 @@ hyperparameters <- function(x){
   UseMethod("hyperparameters")
 }
 
-#' @title 'hypermarameters' method for SplitCV objects
+#' @title 'hyperparameters' method for SplitCV objects
 #' 
 #' @description Get the hyperparameters information of a Split object
 #' 
@@ -152,32 +161,39 @@ hyperparameters.SplitConstructorCV <- function(x){
 #' 
 #' @description method that creates a ResamplePrediction. It contain the relevant 
 #' result information of a resampling: the predictions made, the relevant ground 
-#' truth values, and possibly the training tasks and trained model for each fold
+#' truth values, and the training tasks and trained model for each fold
 #' 
 #' @param data A Dataset object
 #' @param inducer An Inducer Object
-#' @param split_cv The split method
+#' @param split_cv The split method or a SplitInstance object
 #' @examples
-#' resample(cars.data, xgb, splitCV(folds = 5))
+#' cars.data <- Dataset(data = cars, target = "dist")
+#' xgb <- InducerConstructer(configuration = list(nrounds = 10, verbose = 0), method = "XGBoost")
+#' cars.split <- splt$cv(folds = 5)(cars.data)
+#' resample(cars.data, xgb, cars.split)
 #' @export
-#' 
 resample <- function(data, inducer, split_cv) {
   assertClass(data, "Dataset")
   assertClass(inducer, "Inducer")
+  assertMultiClass(split_cv, c("SplitInstance", "Split"))
+  
+  if ("Split" %in% class(split_cv)) {
+    split_cv <- split_cv(data)
+  }
   
   results <- list()
   
   for (split in names(split_cv)) {
-    train_data <- split_cv[[split]]$train
-    validation_data <- split_cv[[split]]$validation
+    train_data <- data[split_cv[[split]]$train, ]
+    validation_data <- data[split_cv[[split]]$validation, ]
     
     # Apply inducer to the training data
-    model <- inducer(train_data)
+    model <- fit(inducer, train_data)
     
     # Evaluate the model on the validation data
     # You need to replace this part with your evaluation code
     # For example, you might use predict() and some performance metric
-    validation_predictions <- predict(model, validation_data)
+    validation_predictions <- predict(model, newdata = validation_data)
     
     # Store the results
     results[[split]] <- list(
@@ -185,6 +201,5 @@ resample <- function(data, inducer, split_cv) {
       predictions = validation_predictions
     )
   }
-  
-  results
+  structure(results, class = "ResamplePrediction")
 }
