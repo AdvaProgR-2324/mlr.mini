@@ -1,7 +1,7 @@
-pandoc: 2.19.2
+pandoc: 3.1.11
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   mlr.mini: mlr.mini.html
-last_built: 2024-02-20T20:43Z
+last_built: 2024-02-29T07:55Z
 
