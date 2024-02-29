@@ -32,6 +32,8 @@ Dataset <- function(data, target, name = deparse(substitute(data)), type) {
   # Target should be the first column
   data_ordered <- data[, c(target, setdiff(names(data), target)), drop = FALSE]
   
+  rownames(data_ordered) <- NULL
+  
   structure(list(
     data = data_ordered,
     target = target,
@@ -52,7 +54,7 @@ Dataset <- function(data, target, name = deparse(substitute(data)), type) {
 #' @export
 print.Dataset <- function(x, ...) {
   cat("Dataset \"", x$name, "\", predicting \"", x$target, "\" (", tools::toTitleCase(x$type), ")\n", sep = "")
-  print(x$data, ...)
+  print(head(x$data), ...)
 }
 
 #' @title '[' method for subsetting `Dataset` objects

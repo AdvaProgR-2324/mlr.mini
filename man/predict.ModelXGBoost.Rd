@@ -2,18 +2,18 @@
 % Please edit documentation in R/Models.R
 \name{predict.ModelXGBoost}
 \alias{predict.ModelXGBoost}
-\title{Predictions for ModelXGBoost}
+\title{'predict' method for \code{ModelXGBoost}}
 \usage{
-\method{predict}{ModelXGBoost}(object, ..., newdata, type = "response")
+\method{predict}{ModelXGBoost}(object, newdata, type = "response", ...)
 }
 \arguments{
 \item{object}{A model object}
 
-\item{...}{Additional arguments}
-
 \item{newdata}{A data frame or Dataset with the new data}
 
 \item{type}{A character string specifying the type of prediction: "response", "se" (standard error), or "prob" (probability). The default is "response".}
+
+\item{...}{Additional arguments}
 }
 \description{
 this function predicts the response variable using a trained ModelXGBoost object

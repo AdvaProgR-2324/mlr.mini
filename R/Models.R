@@ -91,7 +91,7 @@ modelInfo <- function(model) {
 #' prediction <- predict(model.xgb, newdata = cars.data[c(1, 2, 3, 4), ])
 #' prediction
 #' @export
-predict.ModelXGBoost <- function(object, ..., newdata, type = "response") {
+predict.ModelXGBoost <- function(object, newdata, type = "response", ...) {
   # Input Checks
   assertClass(object, "ModelXGBoost")
   assertMultiClass(newdata, c("data.frame", "Dataset"))
@@ -103,10 +103,16 @@ predict.ModelXGBoost <- function(object, ..., newdata, type = "response") {
   
   data <- if (is.data.frame(newdata)) newdata else as.data.frame(newdata)
   
-  # select only the features
-  data <- data[, modelObject(object)$feature_names, drop = FALSE]
+  # prepare data for prediction
+  if (all(metainfo(object$data)$features == "num")) {
+    data_matrix <- as.matrix(data[, names(metainfo(object$data)$features)])
+  } else {
+    response <- object$data$target
+    form <- constructFormula(response, names(data)[(names(data) != response)])
+    data_matrix <- Matrix::sparse.model.matrix(update(form, . ~ . - 1), data = data)
+  }
   
-  predictions <- predict(modelObject(object), newdata = as.matrix(data), ...)
+  predictions <- predict(modelObject(object), newdata = data_matrix, ...)
   
   if (is.data.frame(newdata)) {
     result <- predictions
@@ -128,13 +134,8 @@ predict.ModelXGBoost <- function(object, ..., newdata, type = "response") {
 #' @param newdata A data frame or Dataset with the new data
 #' @param type A character string specifying the type of prediction: "response", "se" (standard error), or "prob" (probability). The default is "response".
 #' 
-#' @examples
-#' cars.data <- Dataset(data = cars, target = "dist")
-#' Glm <- InducerConstructer(configuration = list(family = "gaussian"), method = "Glm")
-#' model.glm <- fit(Glm, cars.data)
-#' predict(model.glm, newdata = data.frame(speed = 10))
 #' @export
-predict.ModelGlm <- function(object, ..., newdata, type = "response") {
+predict.ModelGlm <- function(object, newdata, type = "response", ...) {
   # Input Checks
   assertClass(object, "ModelGlm")
   assertMultiClass(newdata, c("data.frame", "Dataset"))
@@ -176,7 +177,7 @@ predict.ModelGlm <- function(object, ..., newdata, type = "response") {
 #' @param type A character string specifying the type of prediction: "response", "se" (standard error), or "prob" (probability). The default is "response".
 #' 
 #' @export
-predict.ModelDummy <- function(object, ..., newdata, type = "response") {
+predict.ModelDummy <- function(object, newdata, type = "response", ...) {
   # Input Checks
   assertMultiClass(newdata, c("data.frame", "Dataset"))
   assertChoice(type, c("response", "se", "prob"))
@@ -214,7 +215,7 @@ predict.ModelDummy <- function(object, ..., newdata, type = "response") {
 #' @param type A character string specifying the type of prediction: "response", "se" (standard error), or "prob" (probability). The default is "response".
 #' 
 #' @export
-predict.ModelRandomForest <- function(object, ..., newdata, type = "response") {
+predict.ModelRandomForest <- function(object, newdata, type = "response", ...) {
   # Input Checks
   assertMultiClass(newdata, c("data.frame", "Dataset"))
   assertChoice(type, c("response", "se", "prob"))
@@ -227,11 +228,11 @@ predict.ModelRandomForest <- function(object, ..., newdata, type = "response") {
   predictions <- predict(modelObject(object), newdata = data, ...)
   
   if (is.data.frame(newdata)) {
-    result <- predictions
+    result <- unname(predictions)
   } else {
     result <-
       data.frame(prediction = predictions,
-                 truth = as.data.frame(newdata, columns = "target"))
+                 truth = unname(as.data.frame(newdata, columns = "target")))
   }
   return(result)
 }

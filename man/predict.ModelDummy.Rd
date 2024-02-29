@@ -2,22 +2,19 @@
 % Please edit documentation in R/Models.R
 \name{predict.ModelDummy}
 \alias{predict.ModelDummy}
-\title{Predictions for Dummy}
+\title{'predict' method for \code{ModelDummy}}
 \usage{
-\method{predict}{ModelDummy}(object, ..., newdata, type = "response")
+\method{predict}{ModelDummy}(object, newdata, type = "response", ...)
 }
 \arguments{
 \item{object}{A model object}
 
-\item{...}{Additional arguments}
-
 \item{newdata}{A data frame or Dataset with the new data}
 
 \item{type}{A character string specifying the type of prediction: "response", "se" (standard error), or "prob" (probability). The default is "response".}
+
+\item{...}{Additional arguments}
 }
 \description{
 this function predicts the majority class in a classification task or the average outcome in a regression task
-}
-\examples{
-# to do
 }

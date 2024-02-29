@@ -2,22 +2,19 @@
 % Please edit documentation in R/Models.R
 \name{predict.ModelRandomForest}
 \alias{predict.ModelRandomForest}
-\title{Predictions for RandomForest}
+\title{'predict' method for \code{ModelRandomForest}}
 \usage{
-\method{predict}{ModelRandomForest}(object, ..., newdata, type = "response")
+\method{predict}{ModelRandomForest}(object, newdata, type = "response", ...)
 }
 \arguments{
 \item{object}{A model object}
 
-\item{...}{Additional arguments}
-
 \item{newdata}{A data frame or Dataset with the new data}
 
 \item{type}{A character string specifying the type of prediction: "response", "se" (standard error), or "prob" (probability). The default is "response".}
+
+\item{...}{Additional arguments}
 }
 \description{
 this function predicts the response variable using a trained RandomForest model
-}
-\examples{
-# to do
 }

@@ -165,6 +165,8 @@ fit.Inducer <- function(.inducer, .data, ...) {
   assertClass(.inducer, classes = c("Inducer"))
   assertClass(.data, classes = c("Dataset"))
   
+  training_time_start <- Sys.time()
+  
   task <- stringr::str_to_title(.data$type)
   training_data <- .data$data
   response <- .data$target
@@ -177,6 +179,8 @@ fit.Inducer <- function(.inducer, .data, ...) {
   
   model <- fit2(.inducer, task = task, training_data = training_data, response = response)
   
+  training_time_end <- Sys.time()
+  
   structure(
     list(
       inducer = .inducer,
@@ -184,9 +188,10 @@ fit.Inducer <- function(.inducer, .data, ...) {
       X = training_data,
       y = y,
       model = model,
-      task = task
+      task = task,
+      training_time_sec = as.numeric(difftime(training_time_end, training_time_start))
     ),
-    class = c(paste0("Model", .inducer), paste0("Model", task), "Model")
+    class = c(paste0("Model", .inducer$method), paste0("Model", task), "Model")
   )
 }
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/Models.R
 \name{configuration.Model}
 \alias{configuration.Model}
-\title{Configuration Information}
+\title{Access configuration of a model}
 \usage{
 \method{configuration}{Model}(x)
 }
